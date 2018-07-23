@@ -22,4 +22,4 @@ jobs:
           name: deploy to AWS
           command: |
               aws s3 sync ~/project \
-              s3://userlandassetssupport --delete --size-only --exclude=".git/*"
+              s3://userlandassetssupport --delete --exclude=".git/*"
