@@ -1,8 +1,11 @@
 version: 2
 jobs:
-  build:
+ build:
     docker:
       - image: circleci/slim-base
+    branches:
+      only:
+        - master
     steps:
 
       # install git
