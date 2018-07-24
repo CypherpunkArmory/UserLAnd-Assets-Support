@@ -1,6 +1,9 @@
 version: 2
 jobs:
   build:
+  branches:
+      only:
+        - master
     docker:
       - image: circleci/slim-base
     steps:
