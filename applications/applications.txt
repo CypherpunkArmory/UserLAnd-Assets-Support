@@ -1,4 +1,4 @@
 App Name, Category, Supports CLI, Supports GUI, Script, Icon, Paid, Timestamp
-Debian, Distrobution, true, true, , debian, false, 1234567
-Ubuntu, Distrobution, true, true, , ubuntu, false, 1234567
+Debian, Distribution, true, true, , debian, false, 1234567
+Ubuntu, Distribution, true, true, , ubuntu, false, 1234567
 Octave, Math, true, true, octave.sh, octave, true, 1234567
