@@ -1,4 +1,2 @@
 App Name, Category, Supports CLI, Supports GUI, isPaidApp, Version
-Debian, Distribution, true, true, false, 1
-Ubuntu, Distribution, true, true, false, 1
 Octave, Math, true, true, true, 1
