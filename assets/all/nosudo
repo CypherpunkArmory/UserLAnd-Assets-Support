@@ -1,0 +1,103 @@
+#!/bin/bash
+
+debug(){ [[ $DEBUG ]] && echo "$@" >>~/nosudo-debug; }
+die() { echo "error: $1" >/dev/stderr; exit 1; }
+out(){ echo "$@"; debug "out: $@"; }
+
+usage() {
+	cat >/dev/stderr <<-EOF
+	usage: $0 [-u username|#uid] [-bEHi] [VAR=value] command
+	usage: $0 [-u username|#uid] -l [-n] [command]
+	usage: $0 [-u username|#uid] -e [file ...]
+	
+	Options:
+	  -b       run command in the background
+	  -E       preserve user environment when executing command
+	  -e       edit files instead of running a command
+	  -H       set HOME variable to target user's home dir
+	  -h       display help message and exit
+	  -i       run a login shell as target user
+	  -l       list user's available commands (dummy)
+	  -n       non-interactive mode, will not prompt user
+	  -u user  run command (or edit file) as specified user
+	  --       stop processing command line arguments
+	EOF
+	exit 0
+}
+
+_su() {
+	[[ $no_prompt ]] && die "prompt may be needed but -n given"
+	r=125
+	debug "exec: su $@"
+	while [ $r -eq 125 ]; do
+		su "$@"
+		r=$?
+	done
+	exit $r
+}
+
+[[ $DEBUG ]] && echo "DEBUG mode on, writing to ~/nosudo-debug"
+debug "argv: $@"
+
+su_opts=""; user="root"; before_cmd=""; after_cmd=""
+while getopts AbC:Eeg:HhiLlnPp:r:Sst:U:u:Vv flag; do
+	case $flag in
+		b) after_cmd+=" &" ;;
+		E) su_opts+=" -m" ;;
+		e) action="edit" ;;
+		H) set_home=1 ;;
+		h) usage ;;
+		i) su_opts+=" -" ;;
+		l) action="list" ;;
+		n) no_prompt=1 ;;
+		u)
+			user="$OPTARG"
+			if [ "${OPTARG:0:1}" = "#" ]; then
+				uid="${OPTARG:1}"
+				user="$(getent passwd "$uid" | cut -d: -f1)"
+				[ -z "$user" ] && die "uid '$uid' not found in /etc/passwd"
+			fi
+			;;
+		K|k|p|U|V|v)
+			# ignore
+			;;
+		A|C|g|L|P|r|S|s|t)
+			die "nosudo doesn't implement sudo's -$flag flag" ;;
+		?)
+			die "unknown option: -$flag" >&2 ;;
+	esac
+done
+
+shift $(( OPTIND - 1 ));
+
+if [ "$action" = "list" ]; then
+	if [[ $@ ]]; then
+		path="$(which $1)"; shift; args="$@"
+		[ -z "$path" ] && exit 1
+		out "$path $args"
+	else
+		out "User may run the following commands on this host:"
+		out "    (ALL) ALL"
+	fi
+	exit 0
+elif [ "$action" = "edit" ]; then
+	[ -z "$EDITOR" ] && die "\$EDITOR is empty"
+	files="$@"
+	_su $user -c "$EDITOR $files"
+elif [[ $@ ]]; then
+	if [[ $set_home ]]; then
+		before_cmd+="export HOME=$(getent passwd "$user" | cut -d: -f6);"
+	fi
+	while [[ "$1" =~ "=" ]]; do before_cmd+="export $1;"; shift; done
+	prog="$1"; shift; args="$@"
+	if [ -n "$SHELL" ]; then
+		alias="$($SHELL -i -c "alias $prog" 2>/dev/null)"
+		alias="$(echo "$alias" | sed -r "s/^[^=]+=([\"']?)(.*)\1$/\2/")"
+	fi
+	[ -n "$alias" ] && path="$(which "$alias" 2>/dev/null)"
+	[ -z "$path" ] && path="$(which "$prog" 2>/dev/null)"
+	[ -z "$path" ] && path="$prog"
+	_su $su_opts $user -c "$before_cmd $path $args $after_cmd"
+else
+	usage
+fi
