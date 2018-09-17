@@ -7,7 +7,7 @@ checkForServer() {
             echo "found dropbear"
             exit 0
             ;;
-        *tightvnc*)
+        *vnc*)
             echo "found vnc"
             exit 0
             ;;
