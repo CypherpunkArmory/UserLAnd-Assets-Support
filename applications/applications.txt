@@ -1,2 +1,2 @@
-App Name, Category, Supports CLI, Supports GUI, isPaidApp, Version
-Octave, Math, true, true, true, 1
+App Name, Category, Filesystem Type Required, Supports CLI, Supports GUI, isPaidApp, Version
+Octave, Math, debian, true, true, true, 1
