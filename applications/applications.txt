@@ -1,2 +1,0 @@
-App Name, Category, Supports CLI, Supports GUI, isPaidApp, Version
-Octave, Math, true, true, true, 1

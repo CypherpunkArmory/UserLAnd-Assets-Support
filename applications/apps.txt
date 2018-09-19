@@ -1,0 +1,4 @@
+App Name, Category, Filesystem Type Required, Supports CLI, Supports GUI, isPaidApp, Version
+Octave, Math, debian, true, true, true, 1
+Ubuntu, Distribution, ubuntu, true, true, false, 1
+Debian, Distribution, debian, true, true, false, 1
