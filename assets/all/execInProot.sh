@@ -3,18 +3,18 @@
 $ROOT_PATH/support/busybox clear
 
 if [[ ! -r /dev/ashmem ]] ; then
-	$EXTRA_BINDINGS+=" -b $ROOTFS_PATH/tmp:/dev/ashmem " 
+	$EXTRA_BINDINGS="$EXTRA_BINDINGS -b $ROOTFS_PATH/tmp:/dev/ashmem" 
 fi
 if [[ ! -r /dev/shm ]] ; then
-	$EXTRA_BINDINGS+=" -b $ROOTFS_PATH/tmp:/dev/shm " 
+	$EXTRA_BINDINGS="$EXTRA_BINDINGS -b $ROOTFS_PATH/tmp:/dev/shm" 
 fi
 if [[ ! -r /proc/stat ]] ; then
 	numProc="$($ROOT_PATH/support/busybox grep rocessor /proc/cpuinfo)"
 	numProc="${numProc: -1}"
 	if [[ "$numProc" -le "3" ]] 2>/dev/null ; then
-		$EXTRA_BINDINGS+=" -b $ROOT_PATH/support/stat4:/proc/stat " 
+		$EXTRA_BINDINGS="$EXTRA_BINDINGS -b $ROOT_PATH/support/stat4:/proc/stat" 
 	else
-		$EXTRA_BINDINGS+=" -b $ROOT_PATH/support/stat8:/proc/stat " 
+		$EXTRA_BINDINGS="$EXTRA_BINDINGS -b $ROOT_PATH/support/stat8:/proc/stat" 
 	fi
 fi
 
