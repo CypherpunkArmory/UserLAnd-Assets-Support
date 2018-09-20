@@ -3,3 +3,4 @@ isServerInProcTree.sh 1537176474
 killProcTree.sh 1532381687
 stat4 1536961853
 stat8 1536961853
+uptime 1536961853
