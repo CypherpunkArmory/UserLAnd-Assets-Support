@@ -23,3 +23,4 @@ if [[ $? != 0 ]]; then
    exit
 fi
 frotz Advent.z5
+exit
