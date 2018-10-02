@@ -23,3 +23,4 @@ if [[ $? != 0 ]]; then
    exit
 fi
 frotz zdungeon.z5
+exit

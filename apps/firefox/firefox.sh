@@ -14,4 +14,4 @@ if [ ! -f /support/.firefox_app_install_passed ] || [ ! -f /usr/bin/firefox ]; t
       exit
    fi
 fi
-/usr/bin/firefox
+/usr/bin/firefox &> /dev/null &
