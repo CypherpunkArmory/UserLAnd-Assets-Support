@@ -1,6 +1,7 @@
 App Name, Category, Filesystem Type Required, Supports CLI, Supports GUI, isPaidApp, Version
 Ubuntu, Distribution, ubuntu, true, true, false, 1
 Debian, Distribution, debian, true, true, false, 1
-Octave, Math, octave, true, true, true, 1
-Zork, Game, zork, true, true, true, 1
-Adventure, Game, adventure, true, true, true, 1
+Octave, Math, debian, true, true, true, 1
+Zork, Game, debian, true, true, true, 1
+Adventure, Game, debian, true, true, true, 1
+Firefox, Browser, debian, false, true, true, 1
