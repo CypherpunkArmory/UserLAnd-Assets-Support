@@ -6,7 +6,7 @@ sudo rm -f $SCRIPT_PATH
 if [ ! -f /support/.firefox_app_install_passed ] || [ ! -f /usr/bin/firefox ]; then
    rm -f /support/.firefox_app_install_passed 
    sudo apt-get update
-   sudo DEBIAN_FRONTEND=noninteractive apt-get -y install firefox
+   sudo DEBIAN_FRONTEND=noninteractive apt-get -y install firefox-esr
    if [[ $? == 0 ]]; then
       touch /support/.firefox_app_install_passed
    else
