@@ -1,7 +1,6 @@
 #! /bin/bash
 
 SCRIPT_PATH=$(realpath ${BASH_SOURCE})
-
 sudo rm -f $SCRIPT_PATH
 
 if [ ! -f /support/.octave_app_install_passed ] || [ ! -f /usr/bin/octave ]; then
