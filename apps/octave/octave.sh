@@ -6,7 +6,8 @@ sudo rm -f $SCRIPT_PATH
 if [ ! -f /support/.octave_app_install_passed ] || [ ! -f /usr/bin/octave ]; then
    rm -f /support/.octave_app_install_passed 
    sudo apt-get update
-   sudo DEBIAN_FRONTEND=noninteractive apt-get -y install octave less octave-control octave-financial octave-io octave-missing-functions octave-odepkg octave-optim octave-signal octave-specfun octave-statistics octave-symbolic octave-image
+   sudo DEBIAN_FRONTEND=noninteractive apt-get -y --no-install-recommends install octave less octave-control octave-financial octave-io octave-missing-functions octave-odepkg octave-optim octave-signal octave-specfun octave-statistics octave-symbolic octave-image gnuplot
+   sudo DEBIAN_FRONTEND=noninteractive apt-get -y install gnuplot
    if [[ $? == 0 ]]; then
       echo "graphics_toolkit('gnuplot')" > ~/.octaverc
       touch /support/.octave_app_install_passed
