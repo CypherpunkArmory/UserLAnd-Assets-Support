@@ -15,5 +15,5 @@ if [ ! -f /support/.octave_app_install_passed ] || [ ! -f /usr/bin/octave ]; the
    fi
 fi
 if [ -f /support/.octave_app_install_passed ]; then
-   /usr/bin/octave --no-gui
+   /usr/bin/octave
 fi
