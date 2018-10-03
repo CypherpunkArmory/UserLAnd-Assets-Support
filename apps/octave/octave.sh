@@ -17,3 +17,4 @@ fi
 if [ -f /support/.octave_app_install_passed ]; then
    /usr/bin/octave
 fi
+exit
