@@ -13,6 +13,6 @@ fi
 if [[ -z "${DISPLAY}" ]]; then
    GNUTERM=dumb /usr/bin/gnuplot
 else
-   /usr/bin/gnuplot
+   GNUTERM=x11 /usr/bin/gnuplot
 fi
 exit
