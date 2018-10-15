@@ -3,7 +3,7 @@
 SCRIPT_PATH=$(realpath ${BASH_SOURCE})
 sudo rm -f $SCRIPT_PATH
 
-if [ ! -f /usr/bin/chromium-browser ]; then
+if [ ! -f /usr/bin/chromium ]; then
 	sudo apt-get update
 	sudo DEBIAN_FRONTEND=noninteractive apt-get -y install chromium chromium-l10n
 	hash -r
