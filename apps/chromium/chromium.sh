@@ -14,4 +14,4 @@ if [[ $? != 0 ]]; then
    	exit
 fi
 
-/usr/bin/chromium-browser
+/usr/bin/chromium
