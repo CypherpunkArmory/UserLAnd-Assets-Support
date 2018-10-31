@@ -6,5 +6,6 @@ Octave, Math, debian, true, true, true, 1
 R, Math, debian, true, true, true, 1
 Gnuplot, Math, debian, true, true, true, 1
 Zork, Game, debian, true, true, true, 1
+Git, Utility, debian, true, false, true, 1
 Adventure, Game, debian, true, true, true, 1
 Firefox, Browser, debian, false, true, true, 1
