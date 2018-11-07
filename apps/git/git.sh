@@ -16,8 +16,9 @@ fi
 
 if [[ -z "${DISPLAY}" ]]; then
 	GNUTERM=dumb git help
+	read
 else
 	GNUTERM=X11 git gui
 fi
 
-
+exit
