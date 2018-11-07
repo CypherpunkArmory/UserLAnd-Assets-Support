@@ -15,7 +15,7 @@ if [[ $? != 0 ]]; then
 fi
 
 if [[ -z "${DISPLAY}" ]]; then
-	GNUTERM=dumb /usr/bin/git
+	GNUTERM=dumb git-shell
 else
 	GNUTERM=X11 git gui
 fi
