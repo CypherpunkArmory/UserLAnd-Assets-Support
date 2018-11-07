@@ -15,6 +15,8 @@ if [[ $? != 0 ]]; then
 fi
 
 if [[ -z "${DISPLAY}" ]]; then
+	mkdir $HOME/git-shell-commands
+	cd $HOME/git-shell-commands
 	GNUTERM=dumb git-shell
 else
 	GNUTERM=X11 git gui
