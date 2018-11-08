@@ -14,11 +14,6 @@ if [[ $? != 0 ]]; then
    exit
 fi
 
-if [[ -z "${DISPLAY}" ]]; then
-	GNUTERM=dumb git help
-	read
-else
-	GNUTERM=X11 git gui
-fi
+git gui
 
 exit
