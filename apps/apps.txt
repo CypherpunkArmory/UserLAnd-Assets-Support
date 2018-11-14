@@ -8,3 +8,4 @@ Zork, Game, debian, true, true, false, 1
 Adventure, Game, debian, true, true, false, 1
 Firefox, Browser, debian, false, true, false, 1
 Git, VCS, debian, false, true, false, 1
+LibreOffice, Office, debian, false, true, false, 1
