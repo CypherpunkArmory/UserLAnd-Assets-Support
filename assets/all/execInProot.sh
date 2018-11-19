@@ -21,7 +21,7 @@ if [[ ! -r /proc/uptime ]] ; then
 	EXTRA_BINDINGS="$EXTRA_BINDINGS -b $ROOT_PATH/support/uptime:/proc/uptime" 
 fi
 if [[ ! -r /proc/version ]] ; then
-	if [[ ! -r $ROOT_PATH/support/version ]] ; then
+	if [[ ! -f $ROOT_PATH/support/version ]] ; then
 		currDate="$($ROOT_PATH/support/busybox date)"
 		echo "Linux version $OS_VERSION (fake@userland) #1 $currDate" > $ROOT_PATH/support/version
 		EXTRA_BINDINGS="$EXTRA_BINDINGS -b $ROOT_PATH/support/version:/proc/version" 
