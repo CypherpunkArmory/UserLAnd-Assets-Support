@@ -2,6 +2,10 @@
 
 $ROOT_PATH/support/busybox clear
 
+if [[ -z "${OS_VERSION}" ]]; then
+  OS_VERSION="4.0.0"
+fi
+
 if [[ ! -r /dev/ashmem ]] ; then
 	EXTRA_BINDINGS="$EXTRA_BINDINGS -b $ROOTFS_PATH/tmp:/dev/ashmem" 
 fi
