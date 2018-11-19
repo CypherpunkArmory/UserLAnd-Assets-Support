@@ -2,6 +2,10 @@
 
 $ROOT_PATH/support/busybox clear
 
+if [[ -z "${OS_VERSION}" ]]; then
+  OS_VERSION="4.0.0"
+fi
+
 if [[ ! -r /dev/ashmem ]] ; then
 	EXTRA_BINDINGS="$EXTRA_BINDINGS -b $ROOTFS_PATH/tmp:/dev/ashmem" 
 fi
@@ -19,6 +23,11 @@ if [[ ! -r /proc/stat ]] ; then
 fi
 if [[ ! -r /proc/uptime ]] ; then
 	EXTRA_BINDINGS="$EXTRA_BINDINGS -b $ROOT_PATH/support/uptime:/proc/uptime" 
+fi
+if [[ ! -r /proc/version ]] ; then
+	currDate="$($ROOT_PATH/support/busybox date)"
+	echo "Linux version $OS_VERSION (fake@userland) #1 $currDate" > $ROOT_PATH/support/version
+	EXTRA_BINDINGS="$EXTRA_BINDINGS -b $ROOT_PATH/support/version:/proc/version" 
 fi
 
 #launch PRoot
