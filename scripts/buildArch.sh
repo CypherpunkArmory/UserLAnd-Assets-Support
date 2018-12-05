@@ -40,6 +40,8 @@ then
     $TERMUX_PACKAGES_DIR/scripts/setup-ubuntu.sh
     sudo $TERMUX_PACKAGES_DIR/scripts/setup-android-sdk.sh
     sed -i 's/TERMUX_PKG_SRCDIR/PROOT_DIR/g' $TERMUX_PACKAGES_DIR/packages/proot/build.sh
+    sed -i 's/-DARG_MAX/-DUSERLAND -DARG_MAX/g' $TERMUX_PACKAGES_DIR/packages/proot/build.sh
+    sed -i 's/export PROOT_UNBUNDLE_LOADER/#export PROOT_UNBUNDLE_LOADER/g' $TERMUX_PACKAGES_DIR/packages/proot/build.sh
     sed -i 's/make V=1/make clean\n        make V=1/g' $TERMUX_PACKAGES_DIR/packages/proot/build.sh
 fi
 
