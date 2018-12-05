@@ -1,7 +1,7 @@
 #! /bin/bash
 
-export ARCH_DIR=$(realpath output/${1})
-export PROOT_DIR=$(realpath build/proot)
+export ARCH_DIR=$(realpath output)/${1}
+export PROOT_DIR=$(realpath build)/proot
 export TERMUX_PACKAGES_DIR=build/termux-packages
 
 case "$1" in
