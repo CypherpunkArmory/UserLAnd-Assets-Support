@@ -58,5 +58,6 @@ sudo PROOT_DIR=$PROOT_DIR ./build-package.sh -f -a $TERMUX_ARCH dropbear
 cp /data/data/com.termux/files/usr/bin/dbclient $ARCH_DIR/dbclient
 cp /data/data/com.termux/files/usr/lib/libtermux-auth.so $ARCH_DIR/libtermux-auth.so
 cp /data/data/com.termux/files/usr/lib/libutil.so $ARCH_DIR/libutil.so
+cp /data/data/com.termux/files/usr/lib/libcrypto.so.1.1 $ARCH_DIR/libcrypto.so.1.1
 #sudo PROOT_DIR=$PROOT_DIR ./build-package.sh -f -a $TERMUX_ARCH busybox
 #cp /data/data/com.termux/files/usr/bin/busybox $ARCH_DIR/busybox
