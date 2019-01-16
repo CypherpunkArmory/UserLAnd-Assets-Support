@@ -4,13 +4,8 @@ SCRIPT_PATH=$(realpath ${BASH_SOURCE})
 sudo rm -f $SCRIPT_PATH
 
 if [ ! -f /usr/bin/gimp ]; then
-	echo "Warning: GIMP is a fairly large package"
-	echo "with many dependencies. Please ensure you have"
-	echo "the appropriate drive space before installing."
-	sleep 5
-	sudo apt-get update
-sudo DEBIAN_FRONTEND=noninteractive apt-get -y --no-install-recommends install gimp
-
+   sudo apt-get update
+   sudo DEBIAN_FRONTEND=noninteractive apt-get -y --no-install-recommends install gimp
 fi
 
 if [[ $? != 0 ]]; then
