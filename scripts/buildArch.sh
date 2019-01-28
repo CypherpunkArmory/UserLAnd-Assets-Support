@@ -53,6 +53,7 @@ cd $TERMUX_PACKAGES_DIR
 sudo PROOT_DIR=$PROOT_DIR ./build-package.sh -f -a $TERMUX_ARCH libtalloc
 cp /data/data/com.termux/files/usr/lib/libtalloc.so.2 $ARCH_DIR/libtalloc.so.2
 sudo PROOT_DIR=$PROOT_DIR ./build-package.sh -f -a $TERMUX_ARCH leveldb
+cp /data/data/com.termux/files/usr/lib/libc++_shared.so $ARCH_DIR/libc++_shared.so
 cp /data/data/com.termux/files/usr/lib/libleveldb.so.1.20 $ARCH_DIR/libleveldb.so.1
 sudo PROOT_DIR=$PROOT_DIR ./build-package.sh -f -a $TERMUX_ARCH proot
 cp /data/data/com.termux/files/usr/bin/proot $ARCH_DIR/proot
