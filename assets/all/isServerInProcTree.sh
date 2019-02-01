@@ -11,6 +11,10 @@ checkForServer() {
             echo "found vnc"
             exit 0
             ;;
+        *twm*)
+            echo "found twm"
+            exit 0
+            ;;
     esac
     
     for cpid in $(../support/busybox ps -o ppid,pid | ../support/busybox awk -v pid="$1" '$1 == pid { print $2 }') 
