@@ -3,9 +3,9 @@
 SCRIPT_PATH=$(realpath ${BASH_SOURCE})
 sudo rm -f $SCRIPT_PATH
 
-if [ ! -f /usr/bin/gimp ]; then
+if [ ! -f /usr/bin/inkscape ]; then
    sudo apt-get update
-   sudo DEBIAN_FRONTEND=noninteractive apt-get -y --no-install-recommends install gimp
+   sudo DEBIAN_FRONTEND=noninteractive apt-get -y --no-install-recommends install inkscape
 fi
 
 if [[ $? != 0 ]]; then
@@ -13,6 +13,6 @@ if [[ $? != 0 ]]; then
    exit
 fi
 
-gimp
+inkscape
 
 exit
