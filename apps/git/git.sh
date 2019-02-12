@@ -4,9 +4,8 @@ SCRIPT_PATH=$(realpath ${BASH_SOURCE})
 sudo rm -f $SCRIPT_PATH
 
 if [ ! -f /usr/bin/git ]; then
-	sudo apt-get update
-	sudo DEBIAN_FRONTEND=noninteractive apt-get -y --no-install-recommends install git-gui
-
+   sudo apt-get update
+   sudo DEBIAN_FRONTEND=noninteractive apt-get -y --no-install-recommends install git-gui
 fi
 
 if [[ $? != 0 ]]; then
