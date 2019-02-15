@@ -41,7 +41,9 @@ if [ -f $ROOTFS_PATH/support/.success_filesystem_extraction ]; then
 		fi
 	fi
 else
-	$ROOT_PATH/support/busybox touch $ROOTFS_PATH/support/.proot_version
+	if [ ! -f $ROOTFS_PATH/support/.proot_version ]; then
+		$ROOT_PATH/support/busybox touch $ROOTFS_PATH/support/.proot_version
+	fi
 fi
 PROOT_VER=$($ROOT_PATH/support/busybox cat $ROOTFS_PATH/support/.proot_version)
 $ROOT_PATH/support/busybox cp $ROOT_PATH/support/proot$PROOT_VER $ROOTFS_PATH/support/.proot
