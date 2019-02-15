@@ -30,5 +30,23 @@ if [[ ! -r /proc/version ]] ; then
 	EXTRA_BINDINGS="$EXTRA_BINDINGS -b $ROOT_PATH/support/version:/proc/version" 
 fi
 
+#save what proot version we are using, so we cannot mess this up later
+#will make future major upgrades easier
+if [ -f $ROOTFS_PATH/support/.success_filesystem_extraction ]; then
+	if [ ! -f $ROOTFS_PATH/support/.proot_version ]; then
+		if [ -d $ROOTFS_PATH/support/meta_db ]; then
+			$ROOT_PATH/support/busybox echo "_meta_leveldb" > $ROOTFS_PATH/support/.proot_version
+		else
+			$ROOT_PATH/support/busybox echo "_meta" > $ROOTFS_PATH/support/.proot_version
+		fi
+	fi
+else
+	if [ ! -f $ROOTFS_PATH/support/.proot_version ]; then
+		$ROOT_PATH/support/busybox touch $ROOTFS_PATH/support/.proot_version
+	fi
+fi
+PROOT_VER=$($ROOT_PATH/support/busybox cat $ROOTFS_PATH/support/.proot_version)
+$ROOT_PATH/support/busybox cp $ROOT_PATH/support/proot$PROOT_VER $ROOTFS_PATH/support/.proot
+
 #launch PRoot
-PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin PROOT_TMP_DIR=$ROOTFS_PATH/support/ $ROOT_PATH/support/proot -r $ROOTFS_PATH -v $PROOT_DEBUG_LEVEL -p -H -0 -l -L -b /sys -b /dev -b /proc -b /data -b /mnt -b /proc/mounts:/etc/mtab -b /:/host-rootfs -b $ROOTFS_PATH/support/:/support -b $ROOTFS_PATH/support/nosudo:/usr/local/bin/sudo -b $ROOTFS_PATH/support/userland_profile.sh:/etc/profile.d/userland_profile.sh -b $ROOTFS_PATH/support/ld.so.preload:/etc/ld.so.preload $EXTRA_BINDINGS $@
+PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin PROOT_TMP_DIR=$ROOTFS_PATH/support/ $ROOTFS_PATH/support/.proot -r $ROOTFS_PATH -v $PROOT_DEBUG_LEVEL -p -H -0 -l -L -b /sys -b /dev -b /proc -b /data -b /mnt -b /proc/mounts:/etc/mtab -b /:/host-rootfs -b $ROOTFS_PATH/support/:/support -b $ROOTFS_PATH/support/nosudo:/usr/local/bin/sudo -b $ROOTFS_PATH/support/userland_profile.sh:/etc/profile.d/userland_profile.sh -b $ROOTFS_PATH/support/ld.so.preload:/etc/ld.so.preload $EXTRA_BINDINGS $@

@@ -43,7 +43,7 @@ then
     $TERMUX_PACKAGES_DIR/scripts/setup-ubuntu.sh
     sudo $TERMUX_PACKAGES_DIR/scripts/setup-android-sdk.sh
     sed -i 's/TERMUX_PKG_SRCDIR/PROOT_DIR/g' $TERMUX_PACKAGES_DIR/packages/proot/build.sh
-    sed -i 's/-DARG_MAX/-DUSERLAND -DARG_MAX/g' $TERMUX_PACKAGES_DIR/packages/proot/build.sh
+    #sed -i 's/-DARG_MAX/-DUSERLAND -DARG_MAX/g' $TERMUX_PACKAGES_DIR/packages/proot/build.sh
     sed -i 's/export PROOT_UNBUNDLE_LOADER/#export PROOT_UNBUNDLE_LOADER/g' $TERMUX_PACKAGES_DIR/packages/proot/build.sh
     sed -i 's/make V=1/make clean\n        make V=1/g' $TERMUX_PACKAGES_DIR/packages/proot/build.sh
 fi
@@ -54,10 +54,10 @@ sudo PROOT_DIR=$PROOT_DIR ./build-package.sh -f -a $TERMUX_ARCH libtalloc
 cp /data/data/com.termux/files/usr/lib/libtalloc.so.2 $ARCH_DIR/libtalloc.so.2
 sudo PROOT_DIR=$PROOT_DIR ./build-package.sh -f -a $TERMUX_ARCH proot
 cp /data/data/com.termux/files/usr/bin/proot $ARCH_DIR/proot
-sudo PROOT_DIR=$PROOT_DIR ./build-package.sh -f -a $TERMUX_ARCH dropbear
-cp /data/data/com.termux/files/usr/bin/dbclient $ARCH_DIR/dbclient
-cp /data/data/com.termux/files/usr/lib/libtermux-auth.so $ARCH_DIR/libtermux-auth.so
-cp /data/data/com.termux/files/usr/lib/libutil.so $ARCH_DIR/libutil.so
-cp /data/data/com.termux/files/usr/lib/libcrypto.so.1.1 $ARCH_DIR/libcrypto.so.1.1
+#sudo PROOT_DIR=$PROOT_DIR ./build-package.sh -f -a $TERMUX_ARCH dropbear
+#cp /data/data/com.termux/files/usr/bin/dbclient $ARCH_DIR/dbclient
+#cp /data/data/com.termux/files/usr/lib/libtermux-auth.so $ARCH_DIR/libtermux-auth.so
+#cp /data/data/com.termux/files/usr/lib/libutil.so $ARCH_DIR/libutil.so
+#cp /data/data/com.termux/files/usr/lib/libcrypto.so.1.1 $ARCH_DIR/libcrypto.so.1.1
 #sudo PROOT_DIR=$PROOT_DIR ./build-package.sh -f -a $TERMUX_ARCH busybox
 #cp /data/data/com.termux/files/usr/bin/busybox $ARCH_DIR/busybox
