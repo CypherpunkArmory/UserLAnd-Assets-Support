@@ -12,18 +12,18 @@ if [ ! -f /usr/bin/startxfce4 ]; then
    fi
 fi
 
-if grep -q "Session=xfce" ~/.dmrc; then
+if grep -q "user-session=xfce" /usr/share/lightdm/lightdm.conf.d/userland.conf; then
    echo "already setup"
 else
-   echo "[Desktop]" > ~/.dmrc
-   echo "Session=xfce" >> ~/.dmrc
+   sudo echo "[SeatDefaults]" > /usr/share/lightdm/lightdm.conf.d/userland.conf
+   sudo echo "user-session=xfce" >> /usr/share/lightdm/lightdm.conf.d/userland.conf
    while true
    do
-           RED='\033[0;31m'
-           BLUE='\033[0;34m'
-           echo -e "${BLUE}You are requesting a new desktop environment a restart is required."
-           echo -e "${RED}Stop and then restart the app in UserLAnd."
-           sleep 5
+	   RED='\033[0;31m'
+	   BLUE='\033[0;34m'
+	   echo -e "${BLUE}You are requesting a new desktop environment a restart is required."
+	   echo -e "${RED}Stop and then restart the app in UserLAnd."
+	   sleep 5
    done
 fi
 

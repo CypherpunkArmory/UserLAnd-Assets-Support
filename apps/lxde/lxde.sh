@@ -12,11 +12,11 @@ if [ ! -f /usr/bin/startlxde ]; then
    fi
 fi 
 
-if grep -q "Session=LXDE" ~/.dmrc; then
+if grep -q "user-session=LXDE" /usr/share/lightdm/lightdm.conf.d/userland.conf; then
    echo "already setup"
 else
-   echo "[Desktop]" > ~/.dmrc
-   echo "Session=LXDE" >> ~/.dmrc
+   sudo echo "[SeatDefaults]" > /usr/share/lightdm/lightdm.conf.d/userland.conf
+   sudo echo "user-session=LXDE" >> /usr/share/lightdm/lightdm.conf.d/userland.conf
    while true
    do
 	   RED='\033[0;31m'
