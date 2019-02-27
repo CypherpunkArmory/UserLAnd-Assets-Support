@@ -18,12 +18,12 @@ else
    echo "[Desktop]" > ~/.dmrc
    echo "Session=LXDE" >> ~/.dmrc
    while true
+   do
 	   RED='\033[0;31m'
 	   BLUE='\033[0;34m'
 	   echo -e "${BLUE}You are requesting a new desktop environment a restart is required."
 	   echo -e "${RED}Stop and then restart the app in UserLAnd."
 	   sleep 5
-   do
    done
 fi
 
