@@ -3,16 +3,28 @@
 SCRIPT_PATH=$(realpath ${BASH_SOURCE})
 sudo rm -f $SCRIPT_PATH
 
-if [ ! -f /usr/bin/xfce4 ]; then
+if [ ! -f /usr/bin/startxfce4 ]; then
    sudo apt-get update
    sudo DEBIAN_FRONTEND=noninteractive apt-get -y --no-install-recommends install xfce4
+   if [[ $? != 0 ]]; then
+      read -rsp $'An error occurred installing packages, please try again and if it persists provide this log to the developer.\nPress any key to close...\n' -n1 key
+      exit
+   fi
 fi
 
-if [[ $? != 0 ]]; then
-   read -rsp $'An error occurred installing packages, please try again and if it persists provide this log to the developer.\nPress any key to close...\n' -n1 key
-   exit
+if grep -q "Session=xfce" ~/.dmrc; then
+   echo "already setup"
+else
+   echo "[Desktop]" > ~/.dmrc
+   echo "Session=xfce" >> ~/.dmrc
+   while true
+   do
+           RED='\033[0;31m'
+           BLUE='\033[0;34m'
+           echo -e "${BLUE}You are requesting a new desktop environment a restart is required."
+           echo -e "${RED}Stop and then restart the app in UserLAnd."
+           sleep 5
+   done
 fi
-
-startxfce4
 
 exit
