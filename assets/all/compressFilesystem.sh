@@ -4,4 +4,4 @@ if [[ -z "${TAR_PATH}" ]]; then
   TAR_PATH="/sdcard/rootfs.tar.gz"
 fi
 
-/support/common/busybox_static tar -czvf $TAR_PATH --exclude sys --exclude dev --exclude proc --exclude data --exclude mnt --exclude host-rootfs --exclude support --exclude sdcard --exclude etc/mtab --exclude usr/local/bin/sudo --exclude etc/profile.d/userland_profile.sh --exclude etc/ld.so.preload -C /
+/support/common/busybox_static tar -czvf $TAR_PATH --exclude sys --exclude dev --exclude proc --exclude data --exclude mnt --exclude host-rootfs --exclude support --exclude sdcard --exclude etc/mtab --exclude usr/local/bin/sudo --exclude etc/profile.d/userland_profile.sh --exclude etc/ld.so.preload /
