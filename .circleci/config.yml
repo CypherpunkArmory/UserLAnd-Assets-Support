@@ -20,7 +20,7 @@ jobs:
           command: sudo apt-get install binfmt-support qemu qemu-user-static
       - run:
           name: build arm assets
-          command: ./buildArch.sh arm
+          command: sudo ./buildArch.sh arm
       - persist_to_workspace:
           root: .
           paths:
@@ -41,7 +41,7 @@ jobs:
           command: sudo apt-get install binfmt-support qemu qemu-user-static
       - run:
           name: build arm64 assets
-          command: ./buildArch.sh arm64
+          command: sudo ./buildArch.sh arm64
       - persist_to_workspace:
           root: .
           paths:
@@ -56,7 +56,7 @@ jobs:
       - checkout
       - run:
           name: build x86 assets
-          command: ./buildArch.sh x86
+          command: sudo ./buildArch.sh x86
       - persist_to_workspace:
           root: .
           paths:
@@ -71,7 +71,7 @@ jobs:
       - checkout
       - run:
           name: build x86_64 assets
-          command: ./buildArch.sh x86_64
+          command: sudo ./buildArch.sh x86_64
       - persist_to_workspace:
           root: .
           paths:
