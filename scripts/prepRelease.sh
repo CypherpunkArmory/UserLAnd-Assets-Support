@@ -24,4 +24,4 @@ cp assets/all/* $ARCH_DIR/release/
 cp $INSTALL_DIR/* $ARCH_DIR/release/
 rm $ARCH_DIR/release/assets.txt
 rm -f $ARCH_DIR/assets.txt; for f in $(ls $ARCH_DIR/release/); do echo "$f $(date +%s -r $ARCH_DIR/release/$f) $(md5sum $ARCH_DIR/release/$f | awk '{ print $1 }')" >> $ARCH_DIR/assets.txt; done
-tar -czvf $ARCH_DIR/$1-assets.tar.gz --exclude assets.txt $ARCH_DIR/release/*
+tar -czvf $ARCH_DIR/$1-assets.tar.gz --exclude assets.txt -C $ARCH_DIR/release/ .
