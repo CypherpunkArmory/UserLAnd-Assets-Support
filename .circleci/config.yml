@@ -1,28 +1,125 @@
+# Python CircleCI 2.0 configuration file
+#
+# Check https://circleci.com/docs/2.0/language-python/ for more details
+#
 version: 2
+
 jobs:
- build:
-    docker:
-      - image: circleci/slim-base
-    branches:
-      only:
-        - master
+  build_arm:
+    machine: true
+
+    working_directory: ~/UserLAnd-Assets-Support
+
     steps:
-
-      # install git
-      - run: apk update && apk add git
-
-      # checkout the repository
       - checkout
-      # install git submodules for managing third-party dependencies
-      - run: git submodule sync && git submodule update --init
+      - run:
+          name: update packages
+          command: sudo apt-get update
+      - run:
+          name: install binfmt-support
+          command: sudo apt-get install binfmt-support qemu qemu-user-static
+      - run:
+          name: build arm assets
+          command: ./buildArch.sh arm
+      - persist_to_workspace:
+          root: .
+          paths:
+            - release/*    
+
+  build_arm64:
+    machine: true
+
+    working_directory: ~/UserLAnd-Assets-Support
+
+    steps:
+      - checkout
+      - run:
+          name: update packages
+          command: sudo apt-get update
+      - run:
+          name: install binfmt-support
+          command: sudo apt-get install binfmt-support qemu qemu-user-static
+      - run:
+          name: build arm64 assets
+          command: ./buildArch.sh arm64
+      - persist_to_workspace:
+          root: .
+          paths:
+            - release/*    
+
+  build_x86:
+    machine: true
+
+    working_directory: ~/UserLAnd-Assets-Support
+
+    steps:
+      - checkout
+      - run:
+          name: build x86 assets
+          command: ./buildArch.sh x86
+      - persist_to_workspace:
+          root: .
+          paths:
+            - release/*    
+
+  build_x86_64:
+    machine: true
+
+    working_directory: ~/UserLAnd-Assets-Support
+
+    steps:
+      - checkout
+      - run:
+          name: build x86_64 assets
+          command: ./buildArch.sh x86_64
+      - persist_to_workspace:
+          root: .
+          paths:
+            - release/*    
+
+  publish-github-release:
+    docker:
+      - image: circleci/golang:1.12
+      
+    steps:
+      - attach_workspace:
+          at: .
 
       - run:
-          name: install AWS CLI (first install pip, the Python package manager)
+          name: "Publish Release on GitHub"
           command: |
-            apk add --update python python-dev py-pip build-base
-            pip install awscli
-      - deploy:
-          name: deploy to AWS
-          command: |
-              aws s3 sync ~/project \
-              s3://userlandassetssupport --delete --exclude=".git/*"
+            go get github.com/tcnksm/ghr
+            VERSION=$CIRCLE_TAG
+            ghr -t ${GITHUB_TOKEN} -u ${CIRCLE_PROJECT_USERNAME} -r ${CIRCLE_PROJECT_REPONAME} -c ${CIRCLE_SHA1} -delete -draft ${VERSION} release/
+
+workflows:
+  version: 2
+  build_and_test:
+    jobs:
+      - build_arm:
+          filters:
+            tags:
+              only: /.*/
+      - build_arm64:
+          filters:
+            tags:
+              only: /.*/
+      - build_x86:
+          filters:
+            tags:
+              only: /.*/
+      - build_x86_64:
+          filters:
+            tags:
+              only: /.*/
+      - publish-github-release:
+          requires:
+            - build_arm
+            - build_arm64
+            - build_x86
+            - build_x86_64
+          filters:
+            branches:
+              ignore: /.*/
+            tags:
+              only: /^\d+\.\d+\.\d+$/

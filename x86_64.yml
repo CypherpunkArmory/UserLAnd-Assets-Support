@@ -1,0 +1,7 @@
+version: '3.2'
+
+services:
+   imagebuild:
+     build: 
+       args:
+         RUN_CMD: /input/build.sh x86_64
