@@ -78,7 +78,7 @@ jobs:
           command: |
             go get github.com/tcnksm/ghr
             VERSION=$CIRCLE_TAG
-            ghr -t ${GITHUB_TOKEN} -u ${CIRCLE_PROJECT_USERNAME} -r ${CIRCLE_PROJECT_REPONAME} -c ${CIRCLE_SHA1} -delete -draft ${VERSION} release/
+            ghr -t ${GITHUB_TOKEN} -u ${CIRCLE_PROJECT_USERNAME} -r ${CIRCLE_PROJECT_REPONAME} -c ${CIRCLE_SHA1} -delete -draft ${VERSION} output/release/
 
 workflows:
   version: 2
