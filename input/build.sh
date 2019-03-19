@@ -44,9 +44,9 @@ if [ ! -d $TERMUX_PACKAGES_DIR ]
 then
     git clone https://github.com/termux/termux-packages.git $TERMUX_PACKAGES_DIR
     git checkout -b userland 7f9d1ad9243cdcc0d477f8495091fe2bb9444569
-    sed -i 's/TERMUX_PKG_SRCDIR/PROOT_DIR/g' packages/proot/build.sh
-    sed -i 's/export PROOT_UNBUNDLE_LOADER/#export PROOT_UNBUNDLE_LOADER/g' packages/proot/build.sh
-    sed -i 's/make V=1/make clean\n        make V=1/g' packages/proot/build.sh
+    sed -i 's/TERMUX_PKG_SRCDIR/PROOT_DIR/g' $TERMUX_PACKAGES_DIR/packages/proot/build.sh
+    sed -i 's/export PROOT_UNBUNDLE_LOADER/#export PROOT_UNBUNDLE_LOADER/g' $TERMUX_PACKAGES_DIR/packages/proot/build.sh
+    sed -i 's/make V=1/make clean\n        make V=1/g' $TERMUX_PACKAGES_DIR/packages/proot/build.sh
 fi
 
 cd $TERMUX_PACKAGES_DIR
