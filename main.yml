@@ -8,3 +8,4 @@ services:
      volumes:
        - ./output:/output
        - ./input:/input
+       - ./assets:/assets
