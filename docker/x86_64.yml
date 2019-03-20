@@ -4,4 +4,4 @@ services:
    imagebuild:
      build: 
        args:
-         RUN_CMD: /input/build.sh x86_64
+         RUN_CMD: /input/run.sh x86_64
