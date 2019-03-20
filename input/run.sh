@@ -65,6 +65,6 @@ cp /data/data/com.termux/files/usr/lib/libcrypto.so.1.1 $ARCH_DIR/libcrypto.so.1
 PROOT_DIR=$PROOT_DIR ./build-package.sh -f -a $TERMUX_ARCH busybox
 cp /data/data/com.termux/files/usr/bin/busybox $ARCH_DIR/busybox
 
-cp /assets/* $ARCH_DIR
+cp /assets/all/* $ARCH_DIR
 rm -f $RELEASE_DIR/assets.txt; for f in $(ls $ARCH_DIR); do echo "$f $(date +%s -r $ARCH_DIR/$f) $(md5sum $ARCH_DIR/$f | awk '{ print $1 }')" >> $RELEASE_DIR/$1-assets.txt; done
 tar -czvf $RELEASE_DIR/$1-assets.tar.gz -C $ARCH_DIR .

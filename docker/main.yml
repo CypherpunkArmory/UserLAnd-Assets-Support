@@ -4,7 +4,7 @@ services:
    imagebuild:
      build: 
        context: .
-       dockerfile: Dockerfile
+       dockerfile: ./docker/Dockerfile
      volumes:
        - ./output:/output
        - ./input:/input

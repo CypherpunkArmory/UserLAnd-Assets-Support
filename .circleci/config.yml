@@ -78,7 +78,27 @@ jobs:
           command: |
             go get github.com/tcnksm/ghr
             VERSION=$CIRCLE_TAG
-            ghr -t ${GITHUB_TOKEN} -u ${CIRCLE_PROJECT_USERNAME} -r ${CIRCLE_PROJECT_REPONAME} -c ${CIRCLE_SHA1} -delete -draft ${VERSION} output/release/
+            ghr -t ${GITHUB_TOKEN} -u ${CIRCLE_PROJECT_USERNAME} -r ${CIRCLE_PROJECT_REPONAME} -c ${CIRCLE_SHA1} -delete -prerelease ${VERSION} output/release/
+
+  publish-github-commit:
+    docker:
+      - image: circleci/golang:1.12
+      
+    steps:
+      - attach_workspace:
+          at: .
+
+      - run:
+          name: "Make a commit on GitHub"
+          command: |
+            git config credential.helper 'cache --timeout=120'
+            git config user.email "<email>"
+            git config user.name "Deployment Bot"
+            git checkout -b auto-build
+            git add -A
+            git commit --allow-empty -m "Auto-build ${VERSION}"
+            # Push quietly to prevent showing the token in log
+            git push -q https://${GITHUB_TOKEN}@github.com/CypherpunkArmory/UserLAnd-Assets-Support.git auto-build
 
 workflows:
   version: 2
@@ -88,19 +108,38 @@ workflows:
           filters:
             tags:
               only: /.*/
+            branches:
+              ignore: auto-build
       - build_arm64:
           filters:
             tags:
               only: /.*/
+            branches:
+              ignore: auto-build
       - build_x86:
           filters:
             tags:
               only: /.*/
+            branches:
+              ignore: auto-build
       - build_x86_64:
           filters:
             tags:
               only: /.*/
+            branches:
+              ignore: auto-build
       - publish-github-release:
+          requires:
+            - build_arm
+            - build_arm64
+            - build_x86
+            - build_x86_64
+          filters:
+            branches:
+              ignore: /.*/
+            tags:
+              only: /^\d+\.\d+\.\d+$/
+      - publish-github-commit:
           requires:
             - build_arm
             - build_arm64
