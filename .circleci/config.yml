@@ -81,13 +81,12 @@ jobs:
             ghr -t ${GITHUB_TOKEN} -u ${CIRCLE_PROJECT_USERNAME} -r ${CIRCLE_PROJECT_REPONAME} -c ${CIRCLE_SHA1} -delete -prerelease ${VERSION} output/release/
 
   publish-github-commit:
-    docker:
-      - image: circleci/golang:1.12
-      
-    steps:
-      - attach_workspace:
-          at: .
+    machine: true
 
+    working_directory: ~/UserLAnd-Assets-Support
+
+    steps:
+      - checkout
       - run:
           name: "Make a commit on GitHub"
           command: |
