@@ -3,7 +3,7 @@
 SCRIPT_PATH=$(realpath ${BASH_SOURCE})
 sudo rm -f $SCRIPT_PATH
 
-if [ ! -f /usr/bin/idle3 ]; then
+if [ ! -f /usr/bin/idle ]; then
    sudo apt-get update
    sudo DEBIAN_FRONTEND=noninteractive apt-get -y --no-install-recommends install idle3
 fi
