@@ -16,3 +16,4 @@ Git, VCS, debian, false, true, false, 1
 LibreOffice, Office, debian, false, true, false, 1
 Gimp, Office, debian, false, true, false, 1
 Inkscape, Office, debian, false, true, false, 1
+Idle3, Office, debian, false, true, false, 1
