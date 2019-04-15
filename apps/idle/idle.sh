@@ -13,6 +13,6 @@ if [[ $? != 0 ]]; then
    exit
 fi
 
-idle
+idle3
 
 exit
