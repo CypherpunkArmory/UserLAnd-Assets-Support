@@ -40,6 +40,7 @@ fi
 if [ ! -d $TERMUX_PACKAGES_DIR ]
 then
     git clone https://github.com/termux/termux-packages.git $TERMUX_PACKAGES_DIR
+    git checkout -b userland 7f9d1ad9243cdcc0d477f8495091fe2bb9444569
     $TERMUX_PACKAGES_DIR/scripts/setup-ubuntu.sh
     sudo $TERMUX_PACKAGES_DIR/scripts/setup-android-sdk.sh
     sed -i 's/TERMUX_PKG_SRCDIR/PROOT_DIR/g' $TERMUX_PACKAGES_DIR/packages/proot/build.sh
