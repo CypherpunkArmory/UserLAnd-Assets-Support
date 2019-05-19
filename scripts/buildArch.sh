@@ -51,8 +51,8 @@ fi
 
 cd $TERMUX_PACKAGES_DIR
 
-sudo PROOT_DIR=$PROOT_DIR ./build-package.sh -f -a $TERMUX_ARCH libtalloc
-cp /data/data/com.termux/files/usr/lib/libtalloc.so.2 $ARCH_DIR/libtalloc.so.2
+#sudo PROOT_DIR=$PROOT_DIR ./build-package.sh -f -a $TERMUX_ARCH libtalloc
+#cp /data/data/com.termux/files/usr/lib/libtalloc.so.2 $ARCH_DIR/libtalloc.so.2
 sudo PROOT_DIR=$PROOT_DIR ./build-package.sh -f -a $TERMUX_ARCH proot
 cp /data/data/com.termux/files/usr/bin/proot $ARCH_DIR/proot
 #sudo PROOT_DIR=$PROOT_DIR ./build-package.sh -f -a $TERMUX_ARCH dropbear
