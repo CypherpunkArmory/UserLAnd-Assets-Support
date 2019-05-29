@@ -23,5 +23,4 @@ mkdir -p $ARCH_DIR/release
 cp assets/all/* $ARCH_DIR/release/
 cp $INSTALL_DIR/* $ARCH_DIR/release/
 rm $ARCH_DIR/release/assets.txt
-rm -f $ARCH_DIR/$1-assets.txt; for f in $(ls $ARCH_DIR/release/); do echo "$f $(date +%s -r $ARCH_DIR/release/$f) $(md5sum $ARCH_DIR/release/$f | awk '{ print $1 }')" >> $ARCH_DIR/$1-assets.txt; done
-tar -czvf $ARCH_DIR/$1-assets.tar.gz -C $ARCH_DIR/release/ .
+zip $ARCH_DIR/$1-assets.zip $ARCH_DIR/release/*
