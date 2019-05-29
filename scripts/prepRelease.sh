@@ -5,12 +5,16 @@ export INSTALL_DIR=assets/$1
 
 case "$1" in
     x86)
+        ANDROID_ARCH=x86
         ;;
     arm)
+        ANDROID_ARCH=armeabi-v7a
         ;;
     x86_64)
+        ANDROID_ARCH=x86_64
         ;;
     arm64)
+        ANDROID_ARCH=arm64-v8a
         ;;
     *)
         echo "unsupported architecture"
@@ -22,5 +26,4 @@ rm -rf $ARCH_DIR/release
 mkdir -p $ARCH_DIR/release
 cp assets/all/* $ARCH_DIR/release/
 cp $INSTALL_DIR/* $ARCH_DIR/release/
-rm $ARCH_DIR/release/assets.txt
-zip $ARCH_DIR/$1-assets.zip $ARCH_DIR/release/*
+zip $ARCH_DIR/$ANDROID_ARCH-assets.zip $ARCH_DIR/release/*
