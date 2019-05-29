@@ -11,13 +11,13 @@ case "$1" in
     x86)
         TERMUX_ARCH=i686
         ;;
-    arm)
+    armeabi-v7a)
         TERMUX_ARCH=arm
         ;;
     x86_64)
         TERMUX_ARCH=x86_64
         ;;
-    arm64)
+    arm64-v8a)
         TERMUX_ARCH=aarch64
         ;;
     all)

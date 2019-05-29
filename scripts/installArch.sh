@@ -7,13 +7,13 @@ case "$1" in
     x86)
         cp $ARCH_DIR/* $INSTALL_DIR/
         ;;
-    arm)
+    armeabi-v7a)
         cp $ARCH_DIR/* $INSTALL_DIR/
         ;;
     x86_64)
         cp $ARCH_DIR/* $INSTALL_DIR/
         ;;
-    arm64)
+    arm64-v8a)
         cp $ARCH_DIR/* $INSTALL_DIR/
         ;;
     all)
