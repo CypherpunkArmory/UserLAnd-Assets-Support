@@ -1,7 +1,7 @@
 #! /bin/bash
 
-export ARCH_DIR=output/$1
-export INSTALL_DIR=assets/$1
+export ARCH_DIR=$(realpath output)/$1
+export INSTALL_DIR=$(realpath assets)/$1
 
 case "$1" in
     x86)
@@ -26,4 +26,5 @@ rm -rf $ARCH_DIR/release
 mkdir -p $ANDROID_ARCH/release
 cp assets/all/* $ANDROID_ARCH/release/
 cp $INSTALL_DIR/* $ANDROID_ARCH/release/
-zip $ARCH_DIR/$ANDROID_ARCH-assets.zip $ANDROID_ARCH/release/*
+cd $ANDROID_ARCH/release/
+zip $ARCH_DIR/$ANDROID_ARCH-assets.zip *
