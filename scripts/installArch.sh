@@ -24,4 +24,3 @@ case "$1" in
         ;;
 esac
 
-rm -f $INSTALL_DIR/assets.txt; for f in $(ls $INSTALL_DIR); do echo "$f $(date +%s -r $INSTALL_DIR/$f) $(md5sum $INSTALL_DIR/$f | awk '{ print $1 }')" >> $INSTALL_DIR/assets.txt; done
