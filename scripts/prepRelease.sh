@@ -23,8 +23,7 @@ case "$1" in
 esac
 
 rm -rf $ARCH_DIR/release
-mkdir -p $ANDROID_ARCH/release
-cp assets/all/* $ANDROID_ARCH/release/
-cp $INSTALL_DIR/* $ANDROID_ARCH/release/
-cd $ANDROID_ARCH/release/
-zip $ARCH_DIR/$ANDROID_ARCH-assets.zip *
+mkdir -p $ARCH_DIR/release
+cp assets/all/* $ARCH_DIR/release/
+cp $INSTALL_DIR/* $ARCH_DIR/release/
+zip -j $ARCH_DIR/$ANDROID_ARCH-assets.zip $ARCH_DIR/release/*
