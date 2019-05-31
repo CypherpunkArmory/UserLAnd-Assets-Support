@@ -1,5 +1,9 @@
 #!/data/data/tech.ula/files/support/busybox sh
 
+if [[ -z "${LIB_PATH}" ]]; then
+  LIB_PATH="$ROOT_PATH/support"
+fi
+
 $LIB_PATH/busybox clear
 
 if [[ -z "${OS_VERSION}" ]]; then

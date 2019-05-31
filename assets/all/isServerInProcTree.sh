@@ -1,5 +1,9 @@
 #!/data/data/tech.ula/files/support/busybox sh
 
+if [[ -z "${LIB_PATH}" ]]; then
+  LIB_PATH="$ROOT_PATH/support"
+fi
+
 checkForServer() {
     echo "checking $1 $($LIB_PATH/busybox ps -o pid,comm | $LIB_PATH/busybox awk -v pid="$1" '$1 == pid { print $2 }')"
     case "$($LIB_PATH/busybox ps -o pid,comm | $LIB_PATH/busybox awk -v pid="$1" '$1 == pid { print $2 }')" in
