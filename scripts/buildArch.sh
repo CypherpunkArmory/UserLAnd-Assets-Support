@@ -64,16 +64,3 @@ cp /data/data/com.termux/files/usr/libexec/proot/loader32 $ARCH_DIR/loader32
 #cp /data/data/com.termux/files/usr/lib/libcrypto.so.1.1 $ARCH_DIR/libcrypto.so.1.1
 #sudo PROOT_DIR=$PROOT_DIR ./build-package.sh -f -a $TERMUX_ARCH busybox
 #cp /data/data/com.termux/files/usr/bin/busybox $ARCH_DIR/busybox
-#sudo PROOT_DIR=$PROOT_DIR ./build-package.sh -f -a $TERMUX_ARCH openssh
-#cp /data/data/com.termux/files/usr/bin/ssh $ARCH_DIR/ssh
-#cp /data/data/com.termux/files/usr/lib/libandroid-support.so $ARCH_DIR/libandroid-support.so
-#cp /data/data/com.termux/files/usr/lib/libcrypto.so.1.1 $ARCH_DIR/libcrypto.so.1.1
-#cp /data/data/com.termux/files/usr/lib/libz.so.1 $ARCH_DIR/libz.so.1
-#cp /data/data/com.termux/files/usr/lib/libssl.so.1.1 $ARCH_DIR/libssl.so.1.1
-#cp /data/data/com.termux/files/usr/lib/libldns.so $ARCH_DIR/libldns.so
-#cp /data/data/com.termux/files/usr/lib/libgssapi_krb5.so.2 $ARCH_DIR/libgssapi_krb5.so.2
-#cp /data/data/com.termux/files/usr/lib/libkrb5.so.3 $ARCH_DIR/libkrb5.so.3
-#cp /data/data/com.termux/files/usr/lib/libk5crypto.so.3 $ARCH_DIR/libk5crypto.so.3
-#cp /data/data/com.termux/files/usr/lib/libcom_err.so.3 $ARCH_DIR/libcom_err.so.3
-#cp /data/data/com.termux/files/usr/lib/libkrb5support.so.0 $ARCH_DIR/libkrb5support.so.0
-#cp /data/data/com.termux/files/usr/lib/libandroid-glob.so $ARCH_DIR/libandroid-glob.so
