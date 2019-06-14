@@ -55,6 +55,8 @@ cd $TERMUX_PACKAGES_DIR
 #cp /data/data/com.termux/files/usr/lib/libtalloc.so.2 $ARCH_DIR/libtalloc.so.2
 sudo PROOT_DIR=$PROOT_DIR ./build-package.sh -f -a $TERMUX_ARCH proot
 cp /data/data/com.termux/files/usr/bin/proot $ARCH_DIR/proot
+cp /data/data/com.termux/files/usr/libexec/proot/loader $ARCH_DIR/loader
+cp /data/data/com.termux/files/usr/libexec/proot/loader32 $ARCH_DIR/loader32
 #sudo PROOT_DIR=$PROOT_DIR ./build-package.sh -f -a $TERMUX_ARCH dropbear
 #cp /data/data/com.termux/files/usr/bin/dbclient $ARCH_DIR/dbclient
 #cp /data/data/com.termux/files/usr/lib/libtermux-auth.so $ARCH_DIR/libtermux-auth.so
