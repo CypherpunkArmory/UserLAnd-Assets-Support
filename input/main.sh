@@ -5,7 +5,6 @@ mkdir build
 export ARCH_DIR=$(realpath output)/${1}
 export PROOT_DIR=$(realpath build)/proot
 export TERMUX_PACKAGES_DIR=$(realpath build)/termux-packages
-export INSTALL_DIR=$(realpath assets)/$1
 
 case "$1" in
     x86)

@@ -18,7 +18,7 @@ jobs:
       - persist_to_workspace:
           root: .
           paths:
-            - output/release/*    
+            - output/*    
 
   build_arm64:
     machine: true
@@ -33,7 +33,7 @@ jobs:
       - persist_to_workspace:
           root: .
           paths:
-            - output/release/*    
+            - output/*    
 
   build_x86:
     machine: true
@@ -48,7 +48,7 @@ jobs:
       - persist_to_workspace:
           root: .
           paths:
-            - output/release/*    
+            - output/*    
 
   build_x86_64:
     machine: true
@@ -63,7 +63,7 @@ jobs:
       - persist_to_workspace:
           root: .
           paths:
-            - output/release/*    
+            - output/*    
 
   publish-github-release:
     docker:
