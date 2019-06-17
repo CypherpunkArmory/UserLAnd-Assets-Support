@@ -12,15 +12,19 @@ export TERMUX_PACKAGES_DIR=$(realpath build)/termux-packages
 case "$1" in
     x86)
         TERMUX_ARCH=i686
+	ANDROID_ARCH=x86
         ;;
     arm)
         TERMUX_ARCH=arm
+	ANDROID_ARCH=armeabi-v7a
         ;;
     x86_64)
         TERMUX_ARCH=x86_64
+	ANDROID_ARCH=x86_64
         ;;
     arm64)
         TERMUX_ARCH=aarch64
+	ANDROID_ARCH=arm64-v8a
         ;;
     all)
         exit
