@@ -30,7 +30,7 @@ case "$1" in
 esac
 
 apt update
-apt install -y git
+apt install -y git sudo curl unzip
 
 rm -rf $ARCH_DIR
 mkdir -p $ARCH_DIR
