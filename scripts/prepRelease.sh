@@ -28,4 +28,5 @@ cp assets/all/* $ARCH_DIR/release/
 cp $INSTALL_DIR/* $ARCH_DIR/release/
 rm $ARCH_DIR/release/assets.txt
 mkdir -p $ARCH_DIR/../release
+rm $ARCH_DIR/../release/$ANDROID_ARCH-assets.zip
 zip -j $ARCH_DIR/../release/$ANDROID_ARCH-assets.zip $ARCH_DIR/release/*
