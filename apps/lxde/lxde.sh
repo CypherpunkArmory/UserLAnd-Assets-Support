@@ -16,8 +16,6 @@ if grep -q "^/usr/bin/startlxde" ~/.vnc/xstartup; then
    echo "xstartup already setup"
 else
    mkdir -p ~/.vnc
-   echo 'xrdb $HOME/.Xresources' > ~/.vnc/xstartup
-   echo 'xsetroot -solid grey' > ~/.vnc/xstartup
    echo '/usr/bin/startlxde' > ~/.vnc/xstartup
    DE_CHANGED=1
 fi
@@ -25,8 +23,6 @@ fi
 if grep -q "^/usr/bin/startlxde" ~/.xinitrc; then
    echo "xinitrc already setup"
 else
-   echo 'xrdb $HOME/.Xresources' > ~/.xinitrc
-   echo 'xsetroot -solid grey' > ~/.xinitrc
    echo '/usr/bin/startlxde' > ~/.xinitrc
    DE_CHANGED=1
 fi
