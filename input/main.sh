@@ -3,6 +3,9 @@
 mkdir build
 
 export ARCH_DIR=$(realpath output)/${1}
+export RELEASE_DIR=$(realpath output)/release
+export ASSETS_ARCH_DIR=$(realpath assets)/${1}
+export ASSETS_ALL_DIR=$(realpath assets)/all
 export PROOT_DIR=$(realpath build)/proot
 export TERMUX_PACKAGES_DIR=$(realpath build)/termux-packages
 
@@ -29,7 +32,7 @@ case "$1" in
 esac
 
 apt update
-apt install -y git sudo curl unzip
+apt install -y git sudo curl unzip mawk zip
 
 rm -rf $ARCH_DIR
 mkdir -p $ARCH_DIR
@@ -53,6 +56,11 @@ else
     cd $TERMUX_PACKAGES_DIR
 fi
 
+#copy over old
+cp $ASSETS_ARCH_DIR/*  $ARCH_DIR/
+cp $ASSETS_ALL_DIR/*  $ARCH_DIR/
+
+#build new
 rm -rf /data/data/.built-packages/*
 PROOT_DIR=$PROOT_DIR ./build-package.sh -f -a $TERMUX_ARCH libtalloc
 cp /data/data/com.termux/files/usr/lib/libtalloc.so.2 $ARCH_DIR/libtalloc.so.2
@@ -70,3 +78,8 @@ cp /data/data/com.termux/files/usr/lib/libcrypto.so.1.1 $ARCH_DIR/libcrypto.so.1
 #sudo PROOT_DIR=$PROOT_DIR ./build-package.sh -f -a $TERMUX_ARCH busybox
 #cp /data/data/com.termux/files/usr/bin/busybox $ARCH_DIR/busybox
 chmod 755 $ARCH_DIR/*
+
+#finishing touches before PR and release are built
+rm $ARCH_DIR/assets.txt
+zip -j $RELEASE_DIR/$ANDROID_ARCH-assets.zip $ARCH_DIR/*
+for f in $(ls $ARCH_DIR); do echo "$f $(date +%s -r $ARCH_DIR/$f) $(md5sum $ARCH_DIR/$f | awk '{ print $1 }')" >> $ARCH_DIR/assets.txt; done
