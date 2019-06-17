@@ -69,3 +69,4 @@ cp /data/data/com.termux/files/usr/lib/libtermux-auth.so $ARCH_DIR/libtermux-aut
 cp /data/data/com.termux/files/usr/lib/libcrypto.so.1.1 $ARCH_DIR/libcrypto.so.1.1
 #sudo PROOT_DIR=$PROOT_DIR ./build-package.sh -f -a $TERMUX_ARCH busybox
 #cp /data/data/com.termux/files/usr/bin/busybox $ARCH_DIR/busybox
+chmod 755 $ARCH_DIR/*
