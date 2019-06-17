@@ -1,16 +1,20 @@
 #! /bin/bash
 
-export ARCH_DIR=output/$1
-export INSTALL_DIR=assets/$1
+export ARCH_DIR=$(realpath output)/$1
+export INSTALL_DIR=$(realpath assets)/$1
 
 case "$1" in
     x86)
+        ANDROID_ARCH=x86
         ;;
     arm)
+        ANDROID_ARCH=armeabi-v7a
         ;;
     x86_64)
+        ANDROID_ARCH=x86_64
         ;;
     arm64)
+        ANDROID_ARCH=arm64-v8a
         ;;
     *)
         echo "unsupported architecture"
@@ -23,5 +27,6 @@ mkdir -p $ARCH_DIR/release
 cp assets/all/* $ARCH_DIR/release/
 cp $INSTALL_DIR/* $ARCH_DIR/release/
 rm $ARCH_DIR/release/assets.txt
-rm -f $ARCH_DIR/$1-assets.txt; for f in $(ls $ARCH_DIR/release/); do echo "$f $(date +%s -r $ARCH_DIR/release/$f) $(md5sum $ARCH_DIR/release/$f | awk '{ print $1 }')" >> $ARCH_DIR/$1-assets.txt; done
-tar -czvf $ARCH_DIR/$1-assets.tar.gz -C $ARCH_DIR/release/ .
+mkdir -p $ARCH_DIR/../release
+rm $ARCH_DIR/../release/$ANDROID_ARCH-assets.zip
+zip -j $ARCH_DIR/../release/$ANDROID_ARCH-assets.zip $ARCH_DIR/release/*
