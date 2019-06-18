@@ -60,10 +60,6 @@ else
     cd $TERMUX_PACKAGES_DIR
 fi
 
-#copy over old
-cp $ASSETS_ARCH_DIR/*  $ARCH_DIR/
-cp $ASSETS_ALL_DIR/*  $ARCH_DIR/
-
 #build new
 rm -rf /data/data/.built-packages/*
 PROOT_DIR=$PROOT_DIR ./build-package.sh -f -a $TERMUX_ARCH libtalloc
@@ -83,7 +79,13 @@ cp /data/data/com.termux/files/usr/lib/libcrypto.so.1.1 $ARCH_DIR/libcrypto.so.1
 #cp /data/data/com.termux/files/usr/bin/busybox $ARCH_DIR/busybox
 chmod 755 $ARCH_DIR/*
 
+#copy over old and new
+mkdir -p $ARCH_DIR/release
+cp $ASSETS_ARCH_DIR/* $ARCH_DIR/release/
+cp $ASSETS_ALL_DIR/* $ARCH_DIR/release/
+cp $ARCH_DIR/* $ARCH_DIR/release/
+
 #finishing touches before PR and release are built
-rm $ARCH_DIR/assets.txt
-zip -j $RELEASE_DIR/$ANDROID_ARCH-assets.zip $ARCH_DIR/*
-for f in $(ls $ARCH_DIR); do echo "$f $(date +%s -r $ARCH_DIR/$f) $(md5sum $ARCH_DIR/$f | awk '{ print $1 }')" >> $ARCH_DIR/assets.txt; done
+rm $ARCH_DIR/release/assets.txt
+mkdir -p $RELEASE_DIR
+zip -j $RELEASE_DIR/$ANDROID_ARCH-assets.zip $ARCH_DIR/release/*
