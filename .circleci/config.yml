@@ -94,6 +94,10 @@ jobs:
             git config user.email "<email>"
             git config user.name "Deployment Bot"
             git checkout -b auto-build
+            cp ~/output/arm/* assets/arm/
+            cp ~/output/arm64/* assets/arm64/
+            cp ~/output/x86/* assets/x86/
+            cp ~/output/x86_64/* assets/x86_64/
             git add -A
             git commit --allow-empty -m "Auto-build ${VERSION}"
             # Push quietly to prevent showing the token in log
