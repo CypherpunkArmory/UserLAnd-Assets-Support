@@ -96,8 +96,8 @@ jobs:
             git config user.email "<email>"
             git config user.name "Deployment Bot"
             git checkout -b auto-build
-            apt update
-            apt install -y mawk
+            sudo apt update
+            sudo apt install -y mawk
             cp ../output/arm/* assets/arm/
             rm -f assets/arm/assets.txt; for f in $(ls assets/arm/); do echo "$f $(date +%s -r assets/arm/$f) $(md5sum assets/arm/$f | awk '{ print $1 }')" >> assets/arm/assets.txt; done
             cp ../output/arm64/* assets/arm64/
