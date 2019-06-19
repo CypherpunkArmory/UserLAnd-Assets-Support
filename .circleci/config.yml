@@ -116,8 +116,8 @@ jobs:
             rm -f assets/x86_64/assets.txt; for f in $(ls assets/x86_64/); do echo "$f $(date +%s -r assets/x86_64/$f) $(md5sum assets/x86_64/$f | awk '{ print $1 }')" >> assets/x86_64/assets.txt; done
             git add -A
             git commit --allow-empty -m "Auto-build ${VERSION}"
-            # Push quietly to prevent showing the token in log
-            git push -q https://${GITHUB_TOKEN}@github.com/CypherpunkArmory/UserLAnd-Assets-Support.git auto-build
+            # push changes
+            git push --force origin auto-build
             #make a PR
             git pull-request -m "Auto-build ${VERSION}"
 
