@@ -86,6 +86,8 @@ jobs:
     working_directory: ~/UserLAnd-Assets-Support
 
     steps:
+      - attach_workspace:
+          at: .
       - checkout
       - run:
           name: "Make a commit on GitHub"
@@ -94,10 +96,16 @@ jobs:
             git config user.email "<email>"
             git config user.name "Deployment Bot"
             git checkout -b auto-build
-            cp ~/output/arm/* assets/arm/
-            cp ~/output/arm64/* assets/arm64/
-            cp ~/output/x86/* assets/x86/
-            cp ~/output/x86_64/* assets/x86_64/
+            apt update
+            apt install -y mawk
+            cp output/arm/* assets/arm/
+            rm -f assets/arm/assets.txt; for f in $(ls assets/arm/); do echo "$f $(date +%s -r assets/arm/$f) $(md5sum assets/arm/$f | awk '{ print $1 }')" >> assets/arm/assets.txt; done
+            cp output/arm64/* assets/arm64/
+            rm -f assets/arm64/assets.txt; for f in $(ls assets/arm64/); do echo "$f $(date +%s -r assets/arm64/$f) $(md5sum assets/arm64/$f | awk '{ print $1 }')" >> assets/arm64/assets.txt; done
+            cp output/x86/* assets/x86/
+            rm -f assets/x86/assets.txt; for f in $(ls assets/x86/); do echo "$f $(date +%s -r assets/x86/$f) $(md5sum assets/x86/$f | awk '{ print $1 }')" >> assets/x86/assets.txt; done
+            cp output/x86_64/* assets/x86_64/
+            rm -f assets/x86_64/assets.txt; for f in $(ls assets/x86_64/); do echo "$f $(date +%s -r assets/x86_64/$f) $(md5sum assets/x86_64/$f | awk '{ print $1 }')" >> assets/x86_64/assets.txt; done
             git add -A
             git commit --allow-empty -m "Auto-build ${VERSION}"
             # Push quietly to prevent showing the token in log
@@ -141,7 +149,7 @@ workflows:
             branches:
               ignore: /.*/
             tags:
-              only: /^\d+\.\d+\.\d+$/
+              only: /^v\d+\.\d+\.\d+$/
       - publish-github-commit:
           requires:
             - build_arm
