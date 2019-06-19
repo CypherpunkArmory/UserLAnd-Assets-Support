@@ -81,7 +81,8 @@ jobs:
             ghr -t ${GITHUB_TOKEN} -u ${CIRCLE_PROJECT_USERNAME} -r ${CIRCLE_PROJECT_REPONAME} -c ${CIRCLE_SHA1} -delete -prerelease ${VERSION} output/release/
 
   publish-github-commit:
-    machine: true
+    docker:
+      - image: circleci/golang:1.12
 
     working_directory: ~/UserLAnd-Assets-Support
 
