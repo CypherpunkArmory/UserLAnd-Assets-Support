@@ -93,8 +93,6 @@ jobs:
       - run:
           name: "Make a commit on GitHub"
           command: |
-            go get github.com/github/hub
-            alias git=hub
             VERSION=$CIRCLE_TAG
             git config credential.helper 'cache --timeout=120'
             git config user.email "<email>"
@@ -116,10 +114,8 @@ jobs:
             rm -f assets/x86_64/assets.txt; for f in $(ls assets/x86_64/); do echo "$f $(date +%s -r assets/x86_64/$f) $(md5sum assets/x86_64/$f | awk '{ print $1 }')" >> assets/x86_64/assets.txt; done
             git add -A
             git commit --allow-empty -m "Auto-build ${VERSION}"
-            # push changes
-            git push --force origin auto-build
-            #make a PR
-            git pull-request -m "Auto-build ${VERSION}"
+            # Push quietly to prevent showing the token in log
+            git push --force -q https://${GITHUB_TOKEN}@github.com/CypherpunkArmory/UserLAnd-Assets-Support.git auto-build
 
 workflows:
   version: 2
