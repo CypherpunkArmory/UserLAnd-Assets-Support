@@ -93,6 +93,8 @@ jobs:
       - run:
           name: "Make a commit on GitHub"
           command: |
+            go get github.com/github/hub
+            alias git=hub
             git config credential.helper 'cache --timeout=120'
             git config user.email "<email>"
             git config user.name "Deployment Bot"
@@ -115,6 +117,8 @@ jobs:
             git commit --allow-empty -m "Auto-build ${VERSION}"
             # Push quietly to prevent showing the token in log
             git push -q https://${GITHUB_TOKEN}@github.com/CypherpunkArmory/UserLAnd-Assets-Support.git auto-build
+            #make a PR
+            git pull-request -m "Auto-build ${VERSION}"
 
 workflows:
   version: 2
