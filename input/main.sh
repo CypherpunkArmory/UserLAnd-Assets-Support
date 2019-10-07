@@ -46,7 +46,7 @@ then
     git clone https://github.com/CypherpunkArmory/proot.git $PROOT_DIR
     cd $PROOT_DIR
     git fetch
-    git checkout void-sigsys 
+    git checkout merge-termux-again 
 fi
 
 if [ ! -d $TERMUX_PACKAGES_DIR ]
