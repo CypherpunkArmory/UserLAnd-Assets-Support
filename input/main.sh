@@ -53,12 +53,12 @@ if [ ! -d $TERMUX_PACKAGES_DIR ]
 then
     git clone https://github.com/termux/termux-packages.git $TERMUX_PACKAGES_DIR
     cd $TERMUX_PACKAGES_DIR
-    git checkout -b userland 7f9d1ad9243cdcc0d477f8495091fe2bb9444569
+    #git checkout -b userland 7f9d1ad9243cdcc0d477f8495091fe2bb9444569
     scripts/setup-ubuntu.sh
     scripts/setup-android-sdk.sh
     sed -i 's/TERMUX_PKG_SRCDIR/PROOT_DIR/g' packages/proot/build.sh
     sed -i 's/make V=1/make clean\n        make V=1/g' packages/proot/build.sh
-    sed -i 's/c1fd9b235896b1094ee97bfb7e042f93530b5e300781f59b45edf84ee8c75000/cb2eca3fbfa232c9e3874e3852d43b33589f27face98eef10242a853d83a437a/g' packages/ca-certificates/build.sh
+    #sed -i 's/c1fd9b235896b1094ee97bfb7e042f93530b5e300781f59b45edf84ee8c75000/cb2eca3fbfa232c9e3874e3852d43b33589f27face98eef10242a853d83a437a/g' packages/ca-certificates/build.sh
 else
     cd $TERMUX_PACKAGES_DIR
 fi
