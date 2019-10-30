@@ -5,6 +5,9 @@ sudo rm -f $SCRIPT_PATH
 
 if [ ! -f /usr/bin/startlxde ]; then
    sudo apt-get update
+   sudo DEBIAN_FRONTEND=noninteractive apt-get -y install udisks2
+   sudo rm /var/lib/dpkg/info/udisks2.postinst
+   sudo dpkg --configure udisks2
    sudo DEBIAN_FRONTEND=noninteractive apt-get -y install lxde
    if [[ $? != 0 ]]; then
       read -rsp $'An error occurred installing packages, please try again and if it persists provide this log to the developer.\nPress any key to close...\n' -n1 key
