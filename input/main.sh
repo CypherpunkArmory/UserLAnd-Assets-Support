@@ -75,6 +75,19 @@ cp /data/data/com.termux/files/usr/bin/dbclient $ARCH_DIR/dbclient
 cp /data/data/com.termux/files/usr/lib/libutil.so $ARCH_DIR/libutil.so
 cp /data/data/com.termux/files/usr/lib/libtermux-auth.so $ARCH_DIR/libtermux-auth.so
 cp /data/data/com.termux/files/usr/lib/libcrypto.so.1.1 $ARCH_DIR/libcrypto.so.1.1
+PROOT_DIR=$PROOT_DIR ./build-package.sh -f -a $TERMUX_ARCH openssh
+cp /data/data/com.termux/files/usr/bin/ssh $ARCH_DIR/ssh
+cp /data/data/com.termux/files/usr/lib/libandroid-glob.so $ARCH_DIR/
+cp /data/data/com.termux/files/usr/lib/libandroid-support.so $ARCH_DIR/
+cp /data/data/com.termux/files/usr/lib/libcom_err.so.3 $ARCH_DIR/
+cp /data/data/com.termux/files/usr/lib/libc++_shared.so $ARCH_DIR/
+cp /data/data/com.termux/files/usr/lib/libgssapi_krb5.so.2 $ARCH_DIR/
+cp /data/data/com.termux/files/usr/lib/libk5crypto.so.3 $ARCH_DIR/
+cp /data/data/com.termux/files/usr/lib/libkrb5.so.3 $ARCH_DIR/
+cp /data/data/com.termux/files/usr/lib/libkrb5support.so.0 $ARCH_DIR/
+cp /data/data/com.termux/files/usr/lib/libldns.so $ARCH_DIR/
+cp /data/data/com.termux/files/usr/lib/libssl.so.1.1 $ARCH_DIR/
+cp /data/data/com.termux/files/usr/lib/libz.so.1 $ARCH_DIR/
 #sudo PROOT_DIR=$PROOT_DIR ./build-package.sh -f -a $TERMUX_ARCH busybox
 #cp /data/data/com.termux/files/usr/bin/busybox $ARCH_DIR/busybox
 chmod 755 $ARCH_DIR/*
