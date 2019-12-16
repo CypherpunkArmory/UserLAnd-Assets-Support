@@ -81,7 +81,6 @@ cp /data/data/com.termux/files/usr/bin/ssh $ARCH_DIR/ssh
 cp /data/data/com.termux/files/usr/lib/libandroid-glob.so $ARCH_DIR/
 cp /data/data/com.termux/files/usr/lib/libandroid-support.so $ARCH_DIR/
 cp /data/data/com.termux/files/usr/lib/libcom_err.so.3 $ARCH_DIR/
-cp /data/data/com.termux/files/usr/lib/libc++_shared.so $ARCH_DIR/
 cp /data/data/com.termux/files/usr/lib/libgssapi_krb5.so.2 $ARCH_DIR/
 cp /data/data/com.termux/files/usr/lib/libk5crypto.so.3 $ARCH_DIR/
 cp /data/data/com.termux/files/usr/lib/libkrb5.so.3 $ARCH_DIR/
