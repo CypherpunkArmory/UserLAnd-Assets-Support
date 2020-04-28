@@ -36,7 +36,7 @@ case "$1" in
 esac
 
 apt update
-apt install -y git sudo curl unzip mawk zip
+apt install -y git sudo curl unzip mawk zip python
 
 rm -rf $ARCH_DIR
 mkdir -p $ARCH_DIR
