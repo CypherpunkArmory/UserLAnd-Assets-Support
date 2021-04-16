@@ -43,7 +43,7 @@ mkdir -p $ARCH_DIR
 
 if [ ! -d $PROOT_DIR ]
 then
-    git clone https://github.com/CypherpunkArmory/proot.git $PROOT_DIR
+    git clone https://github.com/termux/proot.git $PROOT_DIR
 fi
 
 if [ ! -d $TERMUX_PACKAGES_DIR ]
