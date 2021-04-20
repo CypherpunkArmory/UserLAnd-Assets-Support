@@ -45,6 +45,7 @@ if [ ! -d $PROOT_DIR ]
 then
     #git clone https://github.com/termux/proot.git $PROOT_DIR
     git clone https://github.com/CypherpunkArmory/proot.git $PROOT_DIR
+    cd $PROOT_DIR
     git fetch
     git checkout merge-it
 fi
