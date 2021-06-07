@@ -62,6 +62,7 @@ then
     sed -i 's/TERMUX_PKG_SRCDIR/PROOT_DIR/g' packages/proot/build.sh
     sed -i 's/make V=1/make clean\n        make V=1/g' packages/proot/build.sh
     sed -i 's/c1fd9b235896b1094ee97bfb7e042f93530b5e300781f59b45edf84ee8c75000/adf770dfd574a0d6026bfaa270cb6879b063957177a991d453ff1d302c02081f/g' packages/ca-certificates/build.sh
+    sed -i 's/"21"/"26"/g' scripts/build/termux_step_setup_variables.sh
 else
     cd $TERMUX_PACKAGES_DIR
 fi
