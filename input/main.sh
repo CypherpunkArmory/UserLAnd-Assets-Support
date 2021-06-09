@@ -62,7 +62,6 @@ then
     sed -i 's/TERMUX_PKG_SRCDIR/PROOT_DIR/g' packages/proot/build.sh
     sed -i 's/make V=1/make clean\n        make V=1/g' packages/proot/build.sh
     sed -i 's/c1fd9b235896b1094ee97bfb7e042f93530b5e300781f59b45edf84ee8c75000/adf770dfd574a0d6026bfaa270cb6879b063957177a991d453ff1d302c02081f/g' packages/ca-certificates/build.sh
-    sed -i 's/"21"/"26"/g' scripts/build/termux_step_setup_variables.sh
 else
     cd $TERMUX_PACKAGES_DIR
 fi
@@ -75,6 +74,15 @@ PROOT_DIR=$PROOT_DIR ./build-package.sh -f -a $TERMUX_ARCH proot
 cp /data/data/com.termux/files/usr/bin/proot $ARCH_DIR/proot
 cp /data/data/com.termux/files/usr/libexec/proot/loader $ARCH_DIR/loader
 cp /data/data/com.termux/files/usr/libexec/proot/loader32 $ARCH_DIR/loader32
+sed -i 's/-DARG_MAX/-DPROTECTED_ASHMEM=1 -DARG_MAX/g' packages/proot/build.sh
+sed -i 's/"21"/"26"/g' scripts/build/termux_step_setup_variables.sh
+rm -rf /data/data/.built-packages/*
+PROOT_DIR=$PROOT_DIR ./build-package.sh -f -a $TERMUX_ARCH libtalloc
+cp /data/data/com.termux/files/usr/lib/libtalloc.so.2 $ARCH_DIR/libtalloc.so.2.10
+PROOT_DIR=$PROOT_DIR ./build-package.sh -f -a $TERMUX_ARCH proot
+cp /data/data/com.termux/files/usr/bin/proot $ARCH_DIR/proot.10
+cp /data/data/com.termux/files/usr/libexec/proot/loader $ARCH_DIR/loader.10
+cp /data/data/com.termux/files/usr/libexec/proot/loader32 $ARCH_DIR/loader32.10
 #PROOT_DIR=$PROOT_DIR ./build-package.sh -f -a $TERMUX_ARCH openssl
 #PROOT_DIR=$PROOT_DIR ./build-package.sh -f -a $TERMUX_ARCH termux-auth
 #PROOT_DIR=$PROOT_DIR ./build-package.sh -f -a $TERMUX_ARCH dropbear
