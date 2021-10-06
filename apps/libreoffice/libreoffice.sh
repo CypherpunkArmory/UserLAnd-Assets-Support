@@ -4,8 +4,8 @@ SCRIPT_PATH=$(realpath ${BASH_SOURCE})
 sudo rm -f $SCRIPT_PATH
 
 if [ ! -f /usr/bin/libreoffice ]; then
-   sudo apt-get update
-   sudo DEBIAN_FRONTEND=noninteractive apt-get -y --no-install-recommends install libreoffice
+   sudo DEBIAN_FRONTEND=noninteractive apt -y update
+   sudo DEBIAN_FRONTEND=noninteractive apt -y --no-install-recommends install libreoffice
 fi
 
 if [[ $? != 0 ]]; then
