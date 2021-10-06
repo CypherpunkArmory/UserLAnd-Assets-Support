@@ -13,6 +13,6 @@ if [[ $? != 0 ]]; then
    exit
 fi
 
-/usr/bin/idle3
+/usr/bin/idle
 
 exit
