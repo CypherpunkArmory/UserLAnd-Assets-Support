@@ -62,7 +62,7 @@ then
     scripts/setup-android-sdk.sh
     sed -i 's/TERMUX_PKG_SRCDIR/PROOT_DIR/g' packages/proot/build.sh
     sed -i 's/make V=1/make clean\n        make V=1/g' packages/proot/build.sh
-    sed -i 's/c1fd9b235896b1094ee97bfb7e042f93530b5e300781f59b45edf84ee8c75000/adf770dfd574a0d6026bfaa270cb6879b063957177a991d453ff1d302c02081f/g' packages/ca-certificates/build.sh
+    sed -i 's/0d98a1a961aab523c9dc547e315e1d79e887dea575426ff03567e455fc0b66b4/ae31ecb3c6e9ff3154cb7a55f017090448f88482f0e94ac927c0c67a1f33b9cf/g' packages/ca-certificates/build.sh
 else
     cd $TERMUX_PACKAGES_DIR
 fi
