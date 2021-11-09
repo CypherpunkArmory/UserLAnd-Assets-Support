@@ -57,6 +57,7 @@ then
     #git checkout -b userland 7f9d1ad9243cdcc0d477f8495091fe2bb9444569
     git fetch
     git checkout android-5
+    git checkout master -- packages/ncurses/build.sh
     scripts/setup-ubuntu.sh
     scripts/setup-android-sdk.sh
     sed -i 's/TERMUX_PKG_SRCDIR/PROOT_DIR/g' packages/proot/build.sh
@@ -83,6 +84,7 @@ PROOT_DIR=$PROOT_DIR ./build-package.sh -f -a $TERMUX_ARCH proot
 cp /data/data/com.termux/files/usr/bin/proot $ARCH_DIR/proot.a10
 cp /data/data/com.termux/files/usr/libexec/proot/loader $ARCH_DIR/loader.a10
 cp /data/data/com.termux/files/usr/libexec/proot/loader32 $ARCH_DIR/loader32.a10
+
 PROOT_DIR=$PROOT_DIR ./build-package.sh -f -a $TERMUX_ARCH libtool
 PROOT_DIR=$PROOT_DIR ./build-package.sh -f -a $TERMUX_ARCH libogg
 PROOT_DIR=$PROOT_DIR ./build-package.sh -f -a $TERMUX_ARCH libflac
