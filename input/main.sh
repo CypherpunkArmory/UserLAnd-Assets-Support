@@ -83,6 +83,19 @@ PROOT_DIR=$PROOT_DIR ./build-package.sh -f -a $TERMUX_ARCH proot
 cp /data/data/com.termux/files/usr/bin/proot $ARCH_DIR/proot.a10
 cp /data/data/com.termux/files/usr/libexec/proot/loader $ARCH_DIR/loader.a10
 cp /data/data/com.termux/files/usr/libexec/proot/loader32 $ARCH_DIR/loader32.a10
+PROOT_DIR=$PROOT_DIR ./build-package.sh -f -a $TERMUX_ARCH libtool
+PROOT_DIR=$PROOT_DIR ./build-package.sh -f -a $TERMUX_ARCH libogg
+PROOT_DIR=$PROOT_DIR ./build-package.sh -f -a $TERMUX_ARCH libflac
+PROOT_DIR=$PROOT_DIR ./build-package.sh -f -a $TERMUX_ARCH libc++
+PROOT_DIR=$PROOT_DIR ./build-package.sh -f -a $TERMUX_ARCH libandroid-glob
+PROOT_DIR=$PROOT_DIR ./build-package.sh -f -a $TERMUX_ARCH libvorbis
+PROOT_DIR=$PROOT_DIR ./build-package.sh -f -a $TERMUX_ARCH libsndfile 
+PROOT_DIR=$PROOT_DIR ./build-package.sh -f -a $TERMUX_ARCH libsoxr
+PROOT_DIR=$PROOT_DIR ./build-package.sh -f -a $TERMUX_ARCH speexdsp
+PROOT_DIR=$PROOT_DIR ./build-package.sh -f -a $TERMUX_ARCH pulseaudio
+ls /data/data/com.termux/files/usr/bin/
+ls /data/data/com.termux/files/usr/lib/
+cp /data/data/com.termux/files/usr/bin/pulseaudio $ARCH_DIR/pulseaudio
 #PROOT_DIR=$PROOT_DIR ./build-package.sh -f -a $TERMUX_ARCH openssl
 #PROOT_DIR=$PROOT_DIR ./build-package.sh -f -a $TERMUX_ARCH termux-auth
 #PROOT_DIR=$PROOT_DIR ./build-package.sh -f -a $TERMUX_ARCH dropbear
