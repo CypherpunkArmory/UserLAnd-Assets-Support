@@ -37,7 +37,6 @@ esac
 
 apt update
 apt install -y git sudo curl unzip mawk zip python make build-essential lsb-release sudo
-apt install -y openjdk-8-jre-headless
 
 rm -rf $ARCH_DIR
 mkdir -p $ARCH_DIR
@@ -85,6 +84,8 @@ PROOT_DIR=$PROOT_DIR ./build-package.sh -f -a $TERMUX_ARCH proot
 cp /data/data/com.termux/files/usr/bin/proot $ARCH_DIR/proot.a10
 cp /data/data/com.termux/files/usr/libexec/proot/loader $ARCH_DIR/loader.a10
 cp /data/data/com.termux/files/usr/libexec/proot/loader32 $ARCH_DIR/loader32.a10
+
+taskset 0x1 apt -y install openjdk-8-jre
 
 PROOT_DIR=$PROOT_DIR ./build-package.sh -f -a $TERMUX_ARCH libtool
 PROOT_DIR=$PROOT_DIR ./build-package.sh -f -a $TERMUX_ARCH libogg
