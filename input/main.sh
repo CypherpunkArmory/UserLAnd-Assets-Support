@@ -96,6 +96,12 @@ ls /data/data/com.termux/files/usr/lib/
 ls /data/data/com.termux/files/usr/libexec/
 cp /data/data/com.termux/files/usr/libexec/pulseaudio $ARCH_DIR/pulseaudio
 cp /data/data/com.termux/files/usr/bin/pulseaudio $ARCH_DIR/pulseaudio-script
+cp /data/data/com.termux/files/usr/lib/libpulsecore-13.0.so $ARCH_DIR/libpulsecore-13.0.so
+cp /data/data/com.termux/files/usr/lib/libpulsecommon-13.0.so $ARCH_DIR/libpulsecommon-13.0.so
+cp /data/data/com.termux/files/usr/lib/libpulse.so $ARCH_DIR/libpulse.so
+cp /data/data/com.termux/files/usr/lib/libltdl.so $ARCH_DIR/libltdl.so
+cp /data/data/com.termux/files/usr/lib/libandroid-glob.so $ARCH_DIR/libandroid-glob.so
+
 #PROOT_DIR=$PROOT_DIR ./build-package.sh -f -a $TERMUX_ARCH openssl
 #PROOT_DIR=$PROOT_DIR ./build-package.sh -f -a $TERMUX_ARCH termux-auth
 #PROOT_DIR=$PROOT_DIR ./build-package.sh -f -a $TERMUX_ARCH dropbear
