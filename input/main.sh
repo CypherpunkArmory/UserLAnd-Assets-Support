@@ -94,13 +94,23 @@ PROOT_DIR=$PROOT_DIR ./build-package.sh -f -a $TERMUX_ARCH pulseaudio
 ls /data/data/com.termux/files/usr/bin/
 ls /data/data/com.termux/files/usr/lib/
 ls /data/data/com.termux/files/usr/libexec/
+
 cp /data/data/com.termux/files/usr/libexec/pulseaudio $ARCH_DIR/pulseaudio
 cp /data/data/com.termux/files/usr/bin/pulseaudio $ARCH_DIR/pulseaudio-script
+
 cp /data/data/com.termux/files/usr/lib/libpulsecore-13.0.so $ARCH_DIR/libpulsecore-13.0.so
 cp /data/data/com.termux/files/usr/lib/libpulsecommon-13.0.so $ARCH_DIR/libpulsecommon-13.0.so
 cp /data/data/com.termux/files/usr/lib/libpulse.so $ARCH_DIR/libpulse.so
 cp /data/data/com.termux/files/usr/lib/libltdl.so $ARCH_DIR/libltdl.so
 cp /data/data/com.termux/files/usr/lib/libandroid-glob.so $ARCH_DIR/libandroid-glob.so
+
+cp /data/data/com.termux/files/usr/lib/libiconv.so $ARCH_DIR/libiconv.so
+cp /data/data/com.termux/files/usr/lib/libsndfile.so $ARCH_DIR/libsndfile.so
+cp /data/data/com.termux/files/usr/lib/libspeexdsp.so $ARCH_DIR/libspeexdsp.so
+cp /data/data/com.termux/files/usr/lib/libsoxr.so.0 $ARCH_DIR/libsoxr.so.0
+
+cp /data/data/com.termux/files/usr/lib/libogg.so $ARCH_DIR/libogg.so
+cp /data/data/com.termux/files/usr/lib/libvorbis.so $ARCH_DIR/libvorbis.so
 
 #PROOT_DIR=$PROOT_DIR ./build-package.sh -f -a $TERMUX_ARCH openssl
 #PROOT_DIR=$PROOT_DIR ./build-package.sh -f -a $TERMUX_ARCH termux-auth
