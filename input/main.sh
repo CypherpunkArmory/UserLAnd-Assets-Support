@@ -103,14 +103,15 @@ cp /data/data/com.termux/files/usr/lib/libpulsecommon-13.0.so $ARCH_DIR/libpulse
 cp /data/data/com.termux/files/usr/lib/libpulse.so $ARCH_DIR/libpulse.so
 cp /data/data/com.termux/files/usr/lib/libltdl.so $ARCH_DIR/libltdl.so
 cp /data/data/com.termux/files/usr/lib/libandroid-glob.so $ARCH_DIR/libandroid-glob.so
-
 cp /data/data/com.termux/files/usr/lib/libiconv.so $ARCH_DIR/libiconv.so
 cp /data/data/com.termux/files/usr/lib/libsndfile.so $ARCH_DIR/libsndfile.so
 cp /data/data/com.termux/files/usr/lib/libspeexdsp.so $ARCH_DIR/libspeexdsp.so
 cp /data/data/com.termux/files/usr/lib/libsoxr.so.0 $ARCH_DIR/libsoxr.so.0
-
 cp /data/data/com.termux/files/usr/lib/libogg.so $ARCH_DIR/libogg.so
 cp /data/data/com.termux/files/usr/lib/libvorbis.so $ARCH_DIR/libvorbis.so
+cp /data/data/com.termux/files/usr/lib/libvorbisenc.so $ARCH_DIR/libvorbisenc.so
+cp /data/data/com.termux/files/usr/lib/libvorbisfile.so $ARCH_DIR/libvorbisfile.so
+cp /data/data/com.termux/files/usr/lib/libFLAC.so $ARCH_DIR/libFLAC.so
 
 #PROOT_DIR=$PROOT_DIR ./build-package.sh -f -a $TERMUX_ARCH openssl
 #PROOT_DIR=$PROOT_DIR ./build-package.sh -f -a $TERMUX_ARCH termux-auth
