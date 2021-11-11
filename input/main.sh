@@ -93,7 +93,9 @@ PROOT_DIR=$PROOT_DIR ./build-package.sh -f -a $TERMUX_ARCH speexdsp
 PROOT_DIR=$PROOT_DIR ./build-package.sh -f -a $TERMUX_ARCH pulseaudio
 ls /data/data/com.termux/files/usr/bin/
 ls /data/data/com.termux/files/usr/lib/
-cp /data/data/com.termux/files/usr/bin/pulseaudio $ARCH_DIR/pulseaudio
+ls /data/data/com.termux/files/usr/libexec/
+cp /data/data/com.termux/files/usr/libexec/pulseaudio $ARCH_DIR/pulseaudio
+cp /data/data/com.termux/files/usr/bin/pulseaudio $ARCH_DIR/pulseaudio-script
 #PROOT_DIR=$PROOT_DIR ./build-package.sh -f -a $TERMUX_ARCH openssl
 #PROOT_DIR=$PROOT_DIR ./build-package.sh -f -a $TERMUX_ARCH termux-auth
 #PROOT_DIR=$PROOT_DIR ./build-package.sh -f -a $TERMUX_ARCH dropbear
