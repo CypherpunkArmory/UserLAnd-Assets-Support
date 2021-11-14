@@ -95,7 +95,7 @@ PROOT_DIR=$PROOT_DIR ./build-package.sh -f -a $TERMUX_ARCH pulseaudio
 ls /data/data/com.termux/files/usr/bin/
 ls /data/data/com.termux/files/usr/lib/
 ls /data/data/com.termux/files/usr/libexec/
-ls /data/data/com.termux/files/etc/pulse/
+ls /data/data/com.termux/files/usr/etc/pulse/
 
 cp /data/data/com.termux/files/usr/libexec/pulseaudio $ARCH_DIR/pulseaudio
 cp /data/data/com.termux/files/usr/bin/pulseaudio $ARCH_DIR/pulseaudio-script
@@ -112,8 +112,8 @@ cp /data/data/com.termux/files/usr/lib/libogg.so $ARCH_DIR/libogg.so
 cp /data/data/com.termux/files/usr/lib/libvorbis.so $ARCH_DIR/libvorbis.so
 cp /data/data/com.termux/files/usr/lib/libvorbisenc.so $ARCH_DIR/libvorbisenc.so
 cp /data/data/com.termux/files/usr/lib/libFLAC.so $ARCH_DIR/libFLAC.so
-cp /data/data/com.termux/files/etc/pulse/daemon.conf $ARCH_DIR/daemon.conf
-cp /data/data/com.termux/files/etc/pulse/default.pa $ARCH_DIR/default.pa
+cp /data/data/com.termux/files/usr/etc/pulse/daemon.conf $ARCH_DIR/daemon.conf
+cp /data/data/com.termux/files/usr/etc/pulse/default.pa $ARCH_DIR/default.pa
 
 #PROOT_DIR=$PROOT_DIR ./build-package.sh -f -a $TERMUX_ARCH openssl
 #PROOT_DIR=$PROOT_DIR ./build-package.sh -f -a $TERMUX_ARCH termux-auth
