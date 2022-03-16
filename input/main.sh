@@ -99,6 +99,7 @@ ls /data/data/com.termux/files/usr/lib/pulse-13.0/
 ls /data/data/com.termux/files/usr/lib/pulse-13.0/modules/
 
 cp /data/data/com.termux/files/usr/libexec/pulseaudio $ARCH_DIR/pulseaudio
+cp /data/data/com.termux/files/usr/libexec/pactl $ARCH_DIR/pactl
 cp /data/data/com.termux/files/usr/bin/pulseaudio $ARCH_DIR/pulseaudio-script
 cp /data/data/com.termux/files/usr/lib/libpulsecore-13.0.so $ARCH_DIR/libpulsecore-13.0.so
 cp /data/data/com.termux/files/usr/lib/libpulsecommon-13.0.so $ARCH_DIR/libpulsecommon-13.0.so
