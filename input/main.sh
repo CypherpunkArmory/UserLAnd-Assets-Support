@@ -56,7 +56,6 @@ then
     cd $TERMUX_PACKAGES_DIR
     git fetch
     git checkout android-5
-    git checkout master -- packages/ncurses/build.sh
     scripts/setup-ubuntu.sh
     scripts/setup-android-sdk.sh
 else
