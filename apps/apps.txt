@@ -17,3 +17,4 @@ Gimp, Office, debian, false, true, false, 1
 Inkscape, Office, debian, false, true, false, 1
 Git, Development, debian, false, true, false, 1
 Idle, Development, debian, false, true, false, 1
+Code-Server, Development, debian, false, true, false, 1
