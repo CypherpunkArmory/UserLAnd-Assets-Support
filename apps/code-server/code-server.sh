@@ -5,7 +5,7 @@ sudo rm -f $SCRIPT_PATH
 
 if [ ! -f /usr/bin/code-server ]; then
     sudo apt update
-    sudo apt install ca-certificates
+    sudo apt install -y ca-certificates
     sudo curl -fsSL https://code-server.dev/install.sh | sh
 fi
 
