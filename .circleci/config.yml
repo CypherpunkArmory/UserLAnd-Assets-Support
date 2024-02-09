@@ -67,7 +67,7 @@ jobs:
 
   publish-github-release:
     docker:
-      - image: circleci/golang:1.12
+      - image: circleci/golang:1.17
       
     steps:
       - attach_workspace:
