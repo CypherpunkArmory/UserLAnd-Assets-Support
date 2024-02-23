@@ -60,7 +60,7 @@ export XDG_DATA_HOME="$LIB_PATH/"
 export XDG_CONFIG_HOME="$LIB_PATH/"
 export XDG_STATE_HOME="$LIB_PATH/"
 export TMPDIR="$LIB_PATH/"
-$LIB_PATH/pulseaudio --log-level=4 --log-target=stderr --start --load="module-native-protocol-tcp auth-ip-acl=127.0.0.1 auth-anonymous=1" --exit-idle-time=-1 &> $ROOTFS_PATH/support/paserv.log
+$LIB_PATH/pulseaudio --log-level=4 --log-target=stderr --start --load="module-sles-sink" --load="module-sles-source" --load="module-null-sink sink_name=virtspk sink_properties=device.description=Virtual_Speaker" --load="module-native-protocol-tcp auth-ip-acl=127.0.0.1 auth-anonymous=1" --exit-idle-time=-1 &> $ROOTFS_PATH/support/paserv.log
 unset PULSE_SCRIPT
 unset PULSE_CONFIG
 unset PULSE_DLPATH
