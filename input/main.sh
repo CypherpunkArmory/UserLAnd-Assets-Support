@@ -36,7 +36,7 @@ case "$1" in
 esac
 
 apt update
-apt install -y git sudo curl unzip mawk zip python make build-essential lsb-release sudo
+apt install -y git sudo curl unzip mawk zip python3 make build-essential lsb-release sudo
 
 rm -rf $ARCH_DIR
 mkdir -p $ARCH_DIR
