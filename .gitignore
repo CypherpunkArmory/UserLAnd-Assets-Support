@@ -1,6 +1,6 @@
 # Android Studio generated files and folders
-.externalNativeBuild/
-.cxx/
+".externalNativeBuild/"
+*.cxx/
 *.apk
 
 # IntelliJ
@@ -10,9 +10,6 @@
 # Keystore files
 *.jks
 *.keystore
-
-# Google Services (e.g. APIs or Firebase)
-google-services.json
 
 # Android Profiling
 *.hprof
