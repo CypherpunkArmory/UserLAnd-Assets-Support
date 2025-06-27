@@ -1,15 +1,1 @@
-# Android Studio generated files and folders
-".externalNativeBuild/"
-*.cxx/
-*.apk
 
-# IntelliJ
-*.iml
-.idea
-
-# Keystore files
-*.jks
-*.keystore
-
-# Android Profiling
-*.hprof
