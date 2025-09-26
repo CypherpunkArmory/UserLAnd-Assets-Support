@@ -1,4 +1,4 @@
-FROM ubuntu:bionic
+FROM ubuntu:latest
 
 ARG RUN_CMD
 ENV RUN_CMD ${RUN_CMD}
