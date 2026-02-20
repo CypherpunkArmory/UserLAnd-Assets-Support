@@ -3,7 +3,7 @@ version: 2.1
 executors:
   package-builder:
     docker:
-      - image: termux/package-builder:latest
+      - image: ghcr.io/termux/package-builder:latest
     resource_class: medium
 
 commands:
@@ -16,6 +16,8 @@ commands:
           name: Build proot for << parameters.arch >>
           command: |
             cd ~/termux-packages
+            pwd
+            ls
             ./build-package.sh -a << parameters.arch >> proot
           no_output_timeout: 30m
       - run:
