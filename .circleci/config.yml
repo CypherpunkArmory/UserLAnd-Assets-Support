@@ -15,13 +15,13 @@ commands:
       - run:
           name: Build proot for << parameters.arch >>
           command: |
-            cd /
+            cd /termux-packages
             ./build-package.sh -a << parameters.arch >> proot
           no_output_timeout: 30m
       - run:
           name: Build pulseaudio for << parameters.arch >>
           command: |
-            cd ~/termux-packages
+            cd /termux-packages
             ./build-package.sh -a << parameters.arch >> pulseaudio
           no_output_timeout: 30m
       - run:
