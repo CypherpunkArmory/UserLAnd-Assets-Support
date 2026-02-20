@@ -55,7 +55,6 @@ then
     git clone https://github.com/CypherpunkArmory/termux-packages.git $TERMUX_PACKAGES_DIR
     cd $TERMUX_PACKAGES_DIR
     git fetch
-    git checkout android-5
     scripts/setup-ubuntu.sh
     scripts/setup-android-sdk.sh
 else
@@ -64,22 +63,6 @@ fi
 
 #build new
 rm -rf /data/data/.built-packages/*
-PROOT_DIR=$PROOT_DIR ./build-package.sh -f -a $TERMUX_ARCH libtalloc
-cp /data/data/com.termux/files/usr/lib/libtalloc.so.2 $ARCH_DIR/libtalloc.so.2
-PROOT_DIR=$PROOT_DIR ./build-package.sh -f -a $TERMUX_ARCH proot
-cp /data/data/com.termux/files/usr/bin/proot $ARCH_DIR/proot
-cp /data/data/com.termux/files/usr/libexec/proot/loader $ARCH_DIR/loader
-cp /data/data/com.termux/files/usr/libexec/proot/loader32 $ARCH_DIR/loader32
-sed -i 's/-DARG_MAX/-DPROTECTED_ASHMEM=1 -DARG_MAX/g' packages/proot/build.sh
-sed -i 's/"21"/"26"/g' scripts/build/termux_step_setup_variables.sh
-rm -rf /data/data/.built-packages/*
-PROOT_DIR=$PROOT_DIR ./build-package.sh -f -a $TERMUX_ARCH libtalloc
-cp /data/data/com.termux/files/usr/lib/libtalloc.so.2 $ARCH_DIR/libtalloc.so.2.a10
-PROOT_DIR=$PROOT_DIR ./build-package.sh -f -a $TERMUX_ARCH proot
-cp /data/data/com.termux/files/usr/bin/proot $ARCH_DIR/proot.a10
-cp /data/data/com.termux/files/usr/libexec/proot/loader $ARCH_DIR/loader.a10
-cp /data/data/com.termux/files/usr/libexec/proot/loader32 $ARCH_DIR/loader32.a10
-
 PROOT_DIR=$PROOT_DIR ./build-package.sh -f -a $TERMUX_ARCH libtool
 PROOT_DIR=$PROOT_DIR ./build-package.sh -f -a $TERMUX_ARCH libogg
 PROOT_DIR=$PROOT_DIR ./build-package.sh -f -a $TERMUX_ARCH libflac
@@ -90,6 +73,22 @@ PROOT_DIR=$PROOT_DIR ./build-package.sh -f -a $TERMUX_ARCH libsndfile
 PROOT_DIR=$PROOT_DIR ./build-package.sh -f -a $TERMUX_ARCH libsoxr
 PROOT_DIR=$PROOT_DIR ./build-package.sh -f -a $TERMUX_ARCH speexdsp
 PROOT_DIR=$PROOT_DIR ./build-package.sh -f -a $TERMUX_ARCH pulseaudio
+
+PROOT_DIR=$PROOT_DIR ./build-package.sh -f -a $TERMUX_ARCH libtalloc
+cp /data/data/com.termux/files/usr/lib/libtalloc.so.2 $ARCH_DIR/libtalloc.so.2
+PROOT_DIR=$PROOT_DIR ./build-package.sh -f -a $TERMUX_ARCH proot
+cp /data/data/com.termux/files/usr/bin/proot $ARCH_DIR/proot
+cp /data/data/com.termux/files/usr/libexec/proot/loader $ARCH_DIR/loader
+cp /data/data/com.termux/files/usr/libexec/proot/loader32 $ARCH_DIR/loader32
+sed -i 's/-DARG_MAX/-DPROTECTED_ASHMEM=1 -DARG_MAX/g' packages/proot/build.sh
+sed -i 's/"24"/"26"/g' scripts/build/termux_step_setup_variables.sh
+rm -rf /data/data/.built-packages/*
+PROOT_DIR=$PROOT_DIR ./build-package.sh -f -a $TERMUX_ARCH libtalloc
+cp /data/data/com.termux/files/usr/lib/libtalloc.so.2 $ARCH_DIR/libtalloc.so.2.a10
+PROOT_DIR=$PROOT_DIR ./build-package.sh -f -a $TERMUX_ARCH proot
+cp /data/data/com.termux/files/usr/bin/proot $ARCH_DIR/proot.a10
+cp /data/data/com.termux/files/usr/libexec/proot/loader $ARCH_DIR/loader.a10
+cp /data/data/com.termux/files/usr/libexec/proot/loader32 $ARCH_DIR/loader32.a10
 
 ls /data/data/com.termux/files/usr/bin/
 ls /data/data/com.termux/files/usr/lib/
