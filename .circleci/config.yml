@@ -38,7 +38,7 @@ commands:
             - debs-<< parameters.arch >>.tar.gz
 
 jobs:
-    build-arm:
+  build-arm:
     executor: package-builder
     steps:
       - build_packages:
@@ -106,53 +106,3 @@ workflows:
             tags:
               only: /^v\d+\.\d+\.\d+$/
 
-workflows:
-  version: 2
-  build_and_test:
-    jobs:
-      - build_arm:
-          filters:
-            tags:
-              only: /.*/
-            branches:
-              ignore: auto-build
-      - build_arm64:
-          filters:
-            tags:
-              only: /.*/
-            branches:
-              ignore: auto-build
-      - build_x86:
-          filters:
-            tags:
-              only: /.*/
-            branches:
-              ignore: auto-build
-      - build_x86_64:
-          filters:
-            tags:
-              only: /.*/
-            branches:
-              ignore: auto-build
-      - publish-github-release:
-          requires:
-            - build_arm
-            - build_arm64
-            - build_x86
-            - build_x86_64
-          filters:
-            branches:
-              ignore: /.*/
-            tags:
-              only: /^v\d+\.\d+\.\d+$/
-      - publish-github-commit:
-          requires:
-            - build_arm
-            - build_arm64
-            - build_x86
-            - build_x86_64
-          filters:
-            branches:
-              ignore: /.*/
-            tags:
-              only: /^v\d+\.\d+\.\d+$/
