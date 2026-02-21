@@ -22,13 +22,13 @@ commands:
             cd ~/termux-packages
             pwd
             ls
-            ./build-package.sh -a << parameters.arch >> proot
+            ./build-package.sh -I -f -a << parameters.arch >> proot
           no_output_timeout: 30m
       - run:
           name: Build pulseaudio for << parameters.arch >>
           command: |
             cd ~/termux-packages
-            ./build-package.sh -a << parameters.arch >> pulseaudio
+            ./build-package.sh -I -f -a << parameters.arch >> pulseaudio
           no_output_timeout: 30m
       - run:
           name: Collect .deb artifacts and create tar for << parameters.arch >>
