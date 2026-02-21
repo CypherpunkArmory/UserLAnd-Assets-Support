@@ -13,6 +13,10 @@ commands:
         type: string
     steps:
       - run:
+          name: Clone termux-packages
+          command: |
+            git clone --depth 1 https://github.com/termux/termux-packages.git ~/termux-packages
+      - run:
           name: Build proot for << parameters.arch >>
           command: |
             cd ~/termux-packages
