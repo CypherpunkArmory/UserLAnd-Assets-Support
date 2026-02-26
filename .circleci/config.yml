@@ -97,9 +97,21 @@ workflows:
   build-proot-all-archs:
     jobs:
       - build-arm
+          filters:
+            tags:
+              only: /^v\d+\.\d+\.\d+$/
       - build-arm64
+          filters:
+            tags:
+              only: /^v\d+\.\d+\.\d+$/
       - build-x86
+          filters:
+            tags:
+              only: /^v\d+\.\d+\.\d+$/
       - build-x64
+          filters:
+            tags:
+              only: /^v\d+\.\d+\.\d+$/
       - release:
           requires:
             - build-arm
