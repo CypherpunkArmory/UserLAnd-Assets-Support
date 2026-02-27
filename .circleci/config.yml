@@ -29,13 +29,13 @@ commands:
             ls /data/data/com.termux/files/usr/bin/
             ls /data/data/com.termux/files/usr/lib/
             ls /data/data/com.termux/files/usr/etc/pulse/
-            ls /data/data/com.termux/files/usr/lib/pulse-17.0/
-            ls /data/data/com.termux/files/usr/lib/pulse-17.0/modules/
+            ls /data/data/com.termux/files/usr/lib/pulseaudio/
+            ls /data/data/com.termux/files/usr/lib/pulseaudio/modules/
 
             cp /data/data/com.termux/files/usr/bin/pulseaudio /tmp/artifacts/
             cp /data/data/com.termux/files/usr/bin/pactl /tmp/artifacts/
-            cp /data/data/com.termux/files/usr/lib/libpulsecore-17.0.so /tmp/artifacts/
-            cp /data/data/com.termux/files/usr/lib/libpulsecommon-17.0.so /tmp/artifacts/
+            cp /data/data/com.termux/files/usr/lib/pulseaudio/libpulsecore-17.0.so /tmp/artifacts/
+            cp /data/data/com.termux/files/usr/lib/pulseaudio/libpulsecommon-17.0.so /tmp/artifacts/
             cp /data/data/com.termux/files/usr/lib/libpulse.so /tmp/artifacts/
             cp /data/data/com.termux/files/usr/lib/libltdl.so /tmp/artifacts/
             cp /data/data/com.termux/files/usr/lib/libsndfile.so /tmp/artifacts/
@@ -53,7 +53,7 @@ commands:
 
             cp /data/data/com.termux/files/usr/etc/pulse/daemon.conf /tmp/artifacts/
             cp /data/data/com.termux/files/usr/etc/pulse/default.pa /tmp/artifacts/
-            cp /data/data/com.termux/files/usr/lib/pulse-17.0/modules/* /tmp/artifacts/
+            cp /data/data/com.termux/files/usr/lib/pulseaudio/modules/* /tmp/artifacts/
       - run:
           name: Build proot for << parameters.arch >>
           command: |
