@@ -74,7 +74,7 @@ commands:
 
             cp /data/data/com.termux/files/usr/bin/proot /tmp/artifacts/
             cp /data/data/com.termux/files/usr/libexec/proot/loader /tmp/artifacts/
-            cp /data/data/com.termux/files/usr/libexec/proot/loader32 /tmp/artifacts/
+            cp /data/data/com.termux/files/usr/libexec/proot/loader32 /tmp/artifacts/ || true
             cp /data/data/com.termux/files/usr/lib/libtalloc.so.2 /tmp/artifacts/
       - run:
           name: Collect artifacts and create zip for << parameters.arch >>
