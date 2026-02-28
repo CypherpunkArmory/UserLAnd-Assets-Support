@@ -122,6 +122,7 @@ commands:
           command: |
             mkdir -p /tmp/artifacts
             git clone https://github.com/CypherpunkArmory/UserLAnd-Assets-Support.git ~/assets
+            cd ~/assets
             git fetch
             git checkout new-build
             cp ~/assets/assets/<< parameters.zip_arch >>/* /tmp/artifacts/
