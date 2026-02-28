@@ -11,6 +11,8 @@ commands:
     parameters:
       arch:
         type: string
+      zip_arch:
+        type: string
     steps:
       - run:
           name: Clone termux-packages
