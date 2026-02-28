@@ -17,6 +17,16 @@ commands:
         type: string
     steps:
       - run:
+          name: Copy git repo assets for << parameters.arch >>
+          command: |
+            mkdir -p /tmp/artifacts
+            git clone https://github.com/CypherpunkArmory/UserLAnd-Assets-Support.git ~/assets
+            cd ~/assets
+            git fetch
+            git checkout new-build
+            cp ~/assets/assets/<< parameters.asset_arch >>/* /tmp/artifacts/
+            cp ~/assets/assets/all/* /tmp/artifacts/
+      - run:
           name: Clone termux-packages
           command: |
             git clone --depth 1 https://github.com/CypherpunkArmory/termux-packages.git ~/termux-packages
@@ -119,16 +129,6 @@ commands:
             cp /data/data/com.termux/files/usr/libexec/proot/loader /tmp/artifacts/loader.a10
             cp /data/data/com.termux/files/usr/libexec/proot/loader32 /tmp/artifacts/loader32.a10 || true
             cp /data/data/com.termux/files/usr/lib/libtalloc.so.2 /tmp/artifacts/libtalloc.so.2.a10
-      - run:
-          name: Copy git repo assets for << parameters.arch >>
-          command: |
-            mkdir -p /tmp/artifacts
-            git clone https://github.com/CypherpunkArmory/UserLAnd-Assets-Support.git ~/assets
-            cd ~/assets
-            git fetch
-            git checkout new-build
-            cp ~/assets/assets/<< parameters.asset_arch >>/* /tmp/artifacts/
-            cp ~/assets/assets/all/* /tmp/artifacts/
       - run:
           name: Collect artifacts and create zip for << parameters.arch >>
           command: |
