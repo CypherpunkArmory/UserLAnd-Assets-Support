@@ -15,7 +15,7 @@ commands:
       - run:
           name: Clone termux-packages
           command: |
-            git clone --depth 1 https://github.com/termux/termux-packages.git ~/termux-packages
+            git clone --depth 1 https://github.com/CypherpunkArmory/termux-packages.git ~/termux-packages
       - run:
           name: Build pulseaudio for << parameters.arch >>
           command: |
@@ -44,7 +44,7 @@ commands:
             cp /data/data/com.termux/files/usr/lib/libspeexdsp.so /tmp/artifacts/
             cp /data/data/com.termux/files/usr/lib/libiconv.so /tmp/artifacts/
             cp /data/data/com.termux/files/usr/lib/libandroid-execinfo.so /tmp/artifacts/
-            #
+            cp /data/data/com.termux/files/usr/lib/libandroid-glob.so /tmp/artifacts/
             cp /data/data/com.termux/files/usr/lib/libFLAC.so /tmp/artifacts/
             cp /data/data/com.termux/files/usr/lib/libvorbis.so /tmp/artifacts/
             cp /data/data/com.termux/files/usr/lib/libvorbisenc.so /tmp/artifacts/ 
@@ -52,11 +52,26 @@ commands:
             cp /data/data/com.termux/files/usr/lib/libogg.so /tmp/artifacts/
             cp /data/data/com.termux/files/usr/lib/libmp3lame.so /tmp/artifacts/
 
-            #cp /data/data/com.termux/files/usr/lib/libandroid-glob.so $ARCH_DIR/libandroid-glob.so
-
             cp /data/data/com.termux/files/usr/etc/pulse/daemon.conf /tmp/artifacts/
             cp /data/data/com.termux/files/usr/etc/pulse/default.pa /tmp/artifacts/
             cp /data/data/com.termux/files/usr/lib/pulseaudio/modules/* /tmp/artifacts/
+      - run:
+          name: Build dropbear for << parameters.arch >>
+          command: |
+            cd ~/termux-packages
+            ./build-package.sh -I -f -a << parameters.arch >> dropbear
+          no_output_timeout: 30m
+      - run:
+          name: Save dropbear files for << parameters.arch >>
+          command: |
+            mkdir -p /tmp/artifacts
+            ls /data/data/com.termux/files/usr/bin/
+            ls /data/data/com.termux/files/usr/lib/
+
+            cp /data/data/com.termux/files/usr/bin/dbclient /tmp/artifacts/
+            cp /data/data/com.termux/files/usr/lib/libutil.so /tmp/artifacts/ 
+            cp /data/data/com.termux/files/usr/lib/libtermux-auth.so /tmp/artifacts/
+            cp /data/data/com.termux/files/usr/lib/libcrypto.so.1.1 /tmp/artifacts/
       - run:
           name: Build proot for << parameters.arch >>
           command: |
@@ -80,16 +95,46 @@ commands:
             cp /data/data/com.termux/files/usr/libexec/proot/loader32 /tmp/artifacts/ || true
             cp /data/data/com.termux/files/usr/lib/libtalloc.so.2 /tmp/artifacts/
       - run:
+          name: Build proot.a10 for << parameters.arch >>
+          command: |
+            cd ~/termux-packages
+            sed -i 's/-DARG_MAX/-DPROTECTED_ASHMEM=1 -DARG_MAX/g' packages/proot/build.sh
+            sed -i 's/"24"/"26"/g' scripts/build/termux_step_setup_variables.sh
+            rm -rf /data/data/.built-packages/*
+            ./build-package.sh -I -f -a << parameters.arch >> libtalloc
+            PROOT_DIR=~/proot ./build-package.sh -I -f -a << parameters.arch >> proot
+          no_output_timeout: 30m
+      - run:
+          name: Save proot.a10 files for << parameters.arch >>
+          command: |
+            mkdir -p /tmp/artifacts
+            ls /data/data/com.termux/files/usr/bin/
+            ls /data/data/com.termux/files/usr/lib/
+
+            cp /data/data/com.termux/files/usr/bin/proot /tmp/artifacts/proot.a10
+            cp /data/data/com.termux/files/usr/libexec/proot/loader /tmp/artifacts/loader.a10
+            cp /data/data/com.termux/files/usr/libexec/proot/loader32 /tmp/artifacts/loader32.a10 || true
+            cp /data/data/com.termux/files/usr/lib/libtalloc.so.2 /tmp/artifacts/libtalloc.so.2.a10
+      - run:
+          name: Copy git repo assets for << parameters.arch >>
+          command: |
+            mkdir -p /tmp/artifacts
+            git https://github.com/CypherpunkArmory/UserLAnd-Assets-Support.git ~/assets
+            git fetch
+            git checkout new-build
+            cp ~/assets/assets/<< parameters.zip_arch >>/* /tmp/artifacts/
+            cp ~/assets/assets/all/* /tmp/artifacts/
+      - run:
           name: Collect artifacts and create zip for << parameters.arch >>
           command: |
             mkdir -p /tmp/workspace
-            zip -j /tmp/workspace/<< parameters.arch >>-assets.zip /tmp/artifacts/*
+            zip -j /tmp/workspace/<< parameters.zip_arch >>-assets.zip /tmp/artifacts/*
       - store_artifacts:
-          path: /tmp/workspace/<< parameters.arch >>-assets.zip
+          path: /tmp/workspace/<< parameters.zip_arch >>-assets.zip
       - persist_to_workspace:
           root: /tmp/workspace
           paths:
-            - << parameters.arch >>-assets.zip
+            - << parameters.zip_arch >>-assets.zip
 
 jobs:
   build-arm:
@@ -97,24 +142,28 @@ jobs:
     steps:
       - build_packages:
           arch: arm
+          zip_arch: armeabi-v7a
 
   build-arm64:
     executor: package-builder
     steps:
       - build_packages:
           arch: aarch64
+          zip_arch: arm64-v8a
 
   build-x86:
     executor: package-builder
     steps:
       - build_packages:
           arch: i686
+          zip_arch: x86
 
   build-x64:
     executor: package-builder
     steps:
       - build_packages:
           arch: x86_64
+          zip_arch: x86_64
 
   release:
     docker:
