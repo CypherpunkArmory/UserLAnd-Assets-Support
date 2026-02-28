@@ -121,7 +121,7 @@ commands:
           name: Copy git repo assets for << parameters.arch >>
           command: |
             mkdir -p /tmp/artifacts
-            git https://github.com/CypherpunkArmory/UserLAnd-Assets-Support.git ~/assets
+            git clone https://github.com/CypherpunkArmory/UserLAnd-Assets-Support.git ~/assets
             git fetch
             git checkout new-build
             cp ~/assets/assets/<< parameters.zip_arch >>/* /tmp/artifacts/
