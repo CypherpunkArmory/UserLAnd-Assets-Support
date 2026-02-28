@@ -4,7 +4,7 @@ executors:
   package-builder:
     docker:
       - image: ghcr.io/termux/package-builder:latest
-    resource_class: medium
+    resource_class: large
 
 commands:
   build_packages:
