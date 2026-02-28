@@ -13,6 +13,8 @@ commands:
         type: string
       zip_arch:
         type: string
+      asset_arch:
+        type: string
     steps:
       - run:
           name: Clone termux-packages
@@ -125,7 +127,7 @@ commands:
             cd ~/assets
             git fetch
             git checkout new-build
-            cp ~/assets/assets/<< parameters.zip_arch >>/* /tmp/artifacts/
+            cp ~/assets/assets/<< parameters.asset_arch >>/* /tmp/artifacts/
             cp ~/assets/assets/all/* /tmp/artifacts/
       - run:
           name: Collect artifacts and create zip for << parameters.arch >>
@@ -146,6 +148,7 @@ jobs:
       - build_packages:
           arch: arm
           zip_arch: armeabi-v7a
+          asset_arch: arm
 
   build-arm64:
     executor: package-builder
@@ -153,6 +156,7 @@ jobs:
       - build_packages:
           arch: aarch64
           zip_arch: arm64-v8a
+          asset_arch: arm64
 
   build-x86:
     executor: package-builder
@@ -160,6 +164,7 @@ jobs:
       - build_packages:
           arch: i686
           zip_arch: x86
+          asset_arch: x86
 
   build-x64:
     executor: package-builder
@@ -167,6 +172,7 @@ jobs:
       - build_packages:
           arch: x86_64
           zip_arch: x86_64
+          asset_arch: x86_64
 
   release:
     docker:
