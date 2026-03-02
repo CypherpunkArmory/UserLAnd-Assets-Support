@@ -85,6 +85,7 @@ commands:
             cp /data/data/com.termux/files/usr/bin/dbclient /tmp/artifacts/
             cp /data/data/com.termux/files/usr/lib/libutil.so /tmp/artifacts/ 
             cp /data/data/com.termux/files/usr/lib/libtermux-auth.so /tmp/artifacts/
+            cp /data/data/com.termux/files/usr/lib/libz.so.1 /tmp/artifacts/
             cp /data/data/com.termux/files/usr/lib/libcrypto.so.3 /tmp/artifacts/
       - run:
           name: Build proot for << parameters.arch >>
