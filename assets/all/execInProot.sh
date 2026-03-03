@@ -53,7 +53,11 @@ PROOT_VER=$($LIB_PATH/busybox cat $ROOTFS_PATH/support/.proot_version)
 PROOT="$LIB_PATH/proot$PROOT_VER"
 
 #launch PulseAudio
-if [[ -v SUPPORT_SOUND ]]; then
+if [[ -z "${SOUND_SUPPORT}" ]]; then
+  if [ -f $ROOTFS_PATH/etc/profile.d/sound_support.sh ]; then
+    rm $ROOTFS_PATH/etc/profile.d/sound_support.sh
+  fi
+else
 	export PULSE_SCRIPT="$LIB_PATH/default.pa"
 	export PULSE_CONFIG="$LIB_PATH/daemon.conf"
 	export PULSE_DLPATH="$LIB_PATH/"
@@ -70,6 +74,9 @@ if [[ -v SUPPORT_SOUND ]]; then
 	unset XDG_STATE_HOME
 	unset TMPDIR
 	export PULSE_SERVER="127.0.0.1"
+	if [ ! -f $ROOTFS_PATH/etc/profile.d/sound_support.sh ]; then
+	  echo "export PULSE_SERVER=\"127.0.0.1\"" > $ROOTFS_PATH/etc/profile.d/sound_support.sh
+  fi
 fi
 
 #launch PRoot
