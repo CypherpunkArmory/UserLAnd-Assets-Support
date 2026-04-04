@@ -88,6 +88,19 @@ commands:
             cp /data/data/com.termux/files/usr/lib/libz.so.1 /tmp/artifacts/
             cp /data/data/com.termux/files/usr/lib/libcrypto.so.3 /tmp/artifacts/
       - run:
+          name: Build busybox for << parameters.arch >>
+          command: |
+            cd ~/termux-packages
+            ./build-package.sh -I -f -a << parameters.arch >> busybox
+          no_output_timeout: 30m
+      - run:
+          name: Save busybox files for << parameters.arch >>
+          command: |
+            mkdir -p /tmp/artifacts
+            ls /data/data/com.termux/files/usr/bin/
+
+            cp /data/data/com.termux/files/usr/bin/busybox /tmp/artifacts/
+      - run:
           name: Build proot for << parameters.arch >>
           command: |
             git clone https://github.com/CypherpunkArmory/proot.git ~/proot
