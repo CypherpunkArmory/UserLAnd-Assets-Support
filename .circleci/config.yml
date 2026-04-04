@@ -98,8 +98,10 @@ commands:
           command: |
             mkdir -p /tmp/artifacts
             ls /data/data/com.termux/files/usr/bin/
+            ls /data/data/com.termux/files/usr/lib/
 
             cp /data/data/com.termux/files/usr/bin/busybox /tmp/artifacts/
+            cp /data/data/com.termux/files/usr/lib/libbusybox.so.1.37.0 /tmp/artifacts/ 
       - run:
           name: Build proot for << parameters.arch >>
           command: |
