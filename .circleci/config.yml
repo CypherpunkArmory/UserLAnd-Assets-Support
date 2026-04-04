@@ -102,6 +102,7 @@ commands:
 
             cp /data/data/com.termux/files/usr/bin/busybox /tmp/artifacts/
             cp /data/data/com.termux/files/usr/lib/libbusybox.so.1.37.0 /tmp/artifacts/ 
+            cp /data/data/com.termux/files/usr/lib/libandroid-selinux.so /tmp/artifacts/ 
       - run:
           name: Build proot for << parameters.arch >>
           command: |
