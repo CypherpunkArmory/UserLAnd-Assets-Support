@@ -2,8 +2,8 @@ version: 2.1
 
 executors:
   package-builder:
-    docker:
-      - image: ghcr.io/termux/package-builder:latest
+    machine:
+      image: ghcr.io/termux/package-builder:latest
     resource_class: large
 
 commands:
