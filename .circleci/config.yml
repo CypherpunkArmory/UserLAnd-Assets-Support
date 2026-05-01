@@ -4,7 +4,7 @@ executors:
   package-builder:
     docker:
       - image: ghcr.io/termux/package-builder:latest
-    resource_class: xlarge
+    resource_class: large
 
 commands:
   build_packages:
@@ -31,11 +31,28 @@ commands:
           command: |
             git clone --depth 1 https://github.com/CypherpunkArmory/termux-packages.git ~/termux-packages
       - run:
-          name: Build pulseaudio for << parameters.arch >>
+          name: Build proot for << parameters.arch >>
           command: |
+            git clone https://github.com/CypherpunkArmory/proot.git ~/proot
+            cd ~/proot 
+            git fetch
+            git checkout droid_files
             cd ~/termux-packages
-            ./build-package.sh -I -f -a << parameters.arch >> pulseaudio
+            ./build-package.sh -I -f -a << parameters.arch >> libtalloc
+            PROOT_DIR=~/proot ./build-package.sh -I -f -a << parameters.arch >> proot
           no_output_timeout: 30m
+      - run:
+          name: Save proot files for << parameters.arch >>
+          command: |
+            mkdir -p /tmp/artifacts
+            ls /data/data/com.termux/files/usr/bin/
+            ls /data/data/com.termux/files/usr/lib/
+            ls /data/data/com.termux/files/usr/libexec/proot/
+
+            cp /data/data/com.termux/files/usr/bin/proot /tmp/artifacts/
+            cp /data/data/com.termux/files/usr/libexec/proot/loader /tmp/artifacts/
+            cp /data/data/com.termux/files/usr/libexec/proot/loader32 /tmp/artifacts/ || true
+            cp /data/data/com.termux/files/usr/lib/libtalloc.so.2 /tmp/artifacts/
       - run:
           name: Save pulseaudio files for << parameters.arch >>
           command: |
@@ -70,12 +87,6 @@ commands:
             cp /data/data/com.termux/files/usr/etc/pulse/default.pa /tmp/artifacts/
             cp /data/data/com.termux/files/usr/lib/pulseaudio/modules/* /tmp/artifacts/
       - run:
-          name: Build dropbear for << parameters.arch >>
-          command: |
-            cd ~/termux-packages
-            ./build-package.sh -I -f -a << parameters.arch >> dropbear
-          no_output_timeout: 30m
-      - run:
           name: Save dropbear files for << parameters.arch >>
           command: |
             mkdir -p /tmp/artifacts
@@ -88,12 +99,6 @@ commands:
             cp /data/data/com.termux/files/usr/lib/libz.so.1 /tmp/artifacts/
             cp /data/data/com.termux/files/usr/lib/libcrypto.so.3 /tmp/artifacts/
       - run:
-          name: Build busybox for << parameters.arch >>
-          command: |
-            cd ~/termux-packages
-            ./build-package.sh -I -f -a << parameters.arch >> busybox
-          no_output_timeout: 30m
-      - run:
           name: Save busybox files for << parameters.arch >>
           command: |
             mkdir -p /tmp/artifacts
@@ -104,29 +109,6 @@ commands:
             cp /data/data/com.termux/files/usr/lib/libbusybox.so.1.37.0 /tmp/artifacts/ 
             cp /data/data/com.termux/files/usr/lib/libandroid-selinux.so /tmp/artifacts/ 
             cp /data/data/com.termux/files/usr/lib/libpcre2-8.so /tmp/artifacts/ 
-      - run:
-          name: Build proot for << parameters.arch >>
-          command: |
-            git clone https://github.com/CypherpunkArmory/proot.git ~/proot
-            cd ~/proot 
-            git fetch
-            git checkout droid_files
-            cd ~/termux-packages
-            ./build-package.sh -I -f -a << parameters.arch >> libtalloc
-            PROOT_DIR=~/proot ./build-package.sh -I -f -a << parameters.arch >> proot
-          no_output_timeout: 30m
-      - run:
-          name: Save proot files for << parameters.arch >>
-          command: |
-            mkdir -p /tmp/artifacts
-            ls /data/data/com.termux/files/usr/bin/
-            ls /data/data/com.termux/files/usr/lib/
-            ls /data/data/com.termux/files/usr/libexec/proot/
-
-            cp /data/data/com.termux/files/usr/bin/proot /tmp/artifacts/
-            cp /data/data/com.termux/files/usr/libexec/proot/loader /tmp/artifacts/
-            cp /data/data/com.termux/files/usr/libexec/proot/loader32 /tmp/artifacts/ || true
-            cp /data/data/com.termux/files/usr/lib/libtalloc.so.2 /tmp/artifacts/
       - run:
           name: Build proot.a10 for << parameters.arch >>
           command: |
