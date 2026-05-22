@@ -47,7 +47,7 @@ then
     git clone https://github.com/CypherpunkArmory/proot.git $PROOT_DIR
     cd $PROOT_DIR
     git fetch
-    git checkout no_orphans
+    git checkout droid_files 
 fi
 
 if [ ! -d $TERMUX_PACKAGES_DIR ]
