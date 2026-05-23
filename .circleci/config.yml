@@ -46,6 +46,30 @@ commands:
               git clone --depth 1 https://github.com/CypherpunkArmory/termux-packages.git ~/termux-packages
             '
       - run:
+          name: Build pulseaudio for << parameters.arch >>
+          command: |
+            docker exec builder bash -c '
+              cd ~/termux-packages
+              ./build-package.sh -I -f -a << parameters.arch >> pulseaudio
+            '
+          no_output_timeout: 30m
+      - run:
+          name: Build dropbear for << parameters.arch >>
+          command: |
+            docker exec builder bash -c '
+              cd ~/termux-packages
+              ./build-package.sh -I -f -a << parameters.arch >> dropbear
+            '
+          no_output_timeout: 30m
+      - run:
+          name: Build busybox for << parameters.arch >>
+          command: |
+            docker exec builder bash -c '
+              cd ~/termux-packages
+              ./build-package.sh -I -f -a << parameters.arch >> busybox
+            '
+          no_output_timeout: 30m
+      - run:
           name: Build proot for << parameters.arch >>
           command: |
             docker exec builder bash -c '
