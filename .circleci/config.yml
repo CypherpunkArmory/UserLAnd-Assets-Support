@@ -76,7 +76,7 @@ commands:
               git clone https://github.com/CypherpunkArmory/proot.git ~/proot
               cd ~/proot
               git fetch
-              git checkout droid_files
+              git checkout no_orphans
               cd ~/termux-packages
               ./build-package.sh -I -f -a << parameters.arch >> libtalloc
               PROOT_DIR=~/proot ./build-package.sh -I -f -a << parameters.arch >> proot
