@@ -1,0 +1,1 @@
+rsnake is a configurable terminal Snake game written in Rust. Guide the snake, collect fruit, avoid collisions, and customize gameplay with command-line options or TOML presets. It runs entirely in the terminal and supports emoji-based graphics when an emoji-capable font is installed.
