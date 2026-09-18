@@ -33,6 +33,21 @@ if [[ ! -r /proc/version ]] ; then
 	echo "Linux version $OS_VERSION (fake@userland) #1 $currDate" > $ROOT_PATH/support/version
 	EXTRA_BINDINGS="$EXTRA_BINDINGS -b $ROOT_PATH/support/version:/proc/version" 
 fi
+#bubblewrap reads these two before it sets up its uid/gid mapping, and SELinux denies an
+#untrusted app almost all of /proc/sys/kernel on Android, so the read fails with EACCES and
+#bwrap exits before doing anything. That takes down every sandboxed image decode in newer
+#distros: gdk-pixbuf 2.44+ hands raster decoding to glycin, which runs each loader under
+#bwrap -- so with these unreadable, GTK cannot load a single icon and xfdesktop/xfce4-panel
+#abort outright ("Bail out!"), leaving a desktop with no wallpaper and no panel.
+#65534 is the kernel's own default for both, the same value a normal Linux host reports.
+if [[ ! -r /proc/sys/kernel/overflowuid ]] ; then
+	$LIB_PATH/busybox echo 65534 > $ROOT_PATH/support/overflowuid
+	EXTRA_BINDINGS="$EXTRA_BINDINGS -b $ROOT_PATH/support/overflowuid:/proc/sys/kernel/overflowuid" 
+fi
+if [[ ! -r /proc/sys/kernel/overflowgid ]] ; then
+	$LIB_PATH/busybox echo 65534 > $ROOT_PATH/support/overflowgid
+	EXTRA_BINDINGS="$EXTRA_BINDINGS -b $ROOT_PATH/support/overflowgid:/proc/sys/kernel/overflowgid" 
+fi
 
 #save what proot version we are using, so we cannot mess this up later
 #will make future major upgrades easier
