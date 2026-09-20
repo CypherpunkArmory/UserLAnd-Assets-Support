@@ -154,7 +154,7 @@ commands:
               ls /data/data/com.termux/files/usr/lib/
 
               cp /data/data/com.termux/files/usr/bin/busybox /tmp/artifacts/
-              cp /data/data/com.termux/files/usr/lib/libbusybox.so.1.37.0 /tmp/artifacts/
+              cp /data/data/com.termux/files/usr/lib/libbusybox.so.* /tmp/artifacts/ || true
               cp /data/data/com.termux/files/usr/lib/libandroid-selinux.so /tmp/artifacts/
               cp /data/data/com.termux/files/usr/lib/libpcre2-8.so /tmp/artifacts/
             '
