@@ -181,6 +181,38 @@ commands:
               cp /data/data/com.termux/files/usr/lib/libtalloc.so.2 /tmp/artifacts/libtalloc.so.2.a10
             '
       - run:
+          # The lists above name each library by hand, so a dependency termux adds upstream is
+          # silently left out: libsndfile came to need libmpg123, which no list copied, and
+          # pulseaudio could no longer start ("library libmpg123.so not found"). Copy whatever
+          # the shipped binaries link against from the termux prefix, repeating until nothing new
+          # turns up. Android's own libraries are always skipped: termux keeps same-named copies
+          # of some (libandroid.so, libOpenSLES.so) in its prefix, and shipping those would load
+          # them in place of the system's.
+          name: Add shared library dependencies for << parameters.arch >>
+          command: |
+            docker exec builder bash -c '
+              prefix=/data/data/com.termux/files/usr
+              system=" libc.so libm.so libdl.so liblog.so libz.so libandroid.so libOpenSLES.so libaaudio.so libEGL.so libGLESv1_CM.so libGLESv2.so libGLESv3.so libvulkan.so libjnigraphics.so libmediandk.so libcamera2ndk.so libnativewindow.so libsync.so libneuralnetworks.so libamidi.so libbinder_ndk.so libstdc++.so "
+              added=1
+              while [ "$added" = 1 ]; do
+                added=0
+                for f in /tmp/artifacts/*; do
+                  for lib in $(readelf -d "$f" 2>/dev/null | sed -n "s/.*(NEEDED).*\[\(.*\)\]/\1/p"); do
+                    [ -e "/tmp/artifacts/$lib" ] && continue
+                    case "$system" in *" $lib "*) continue;; esac
+                    for dir in "$prefix/lib" "$prefix/lib/pulseaudio"; do
+                      if [ -e "$dir/$lib" ]; then
+                        cp -L "$dir/$lib" /tmp/artifacts/
+                        echo "added $lib (needed by $(basename "$f"))"
+                        added=1
+                        break
+                      fi
+                    done
+                  done
+                done
+              done
+            '
+      - run:
           name: Collect artifacts and create zip for << parameters.arch >>
           command: |
             docker exec builder bash -c '
