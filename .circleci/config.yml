@@ -226,15 +226,8 @@ commands:
           paths:
             - << parameters.zip_arch >>-assets.zip
 
+# 64-bit only: UserLAnd no longer supports 32-bit ARM or x86 devices.
 jobs:
-  build-arm:
-    executor: package-builder
-    steps:
-      - build_packages:
-          arch: arm
-          zip_arch: armeabi-v7a
-          asset_arch: arm
-
   build-arm64:
     executor: package-builder
     steps:
@@ -242,14 +235,6 @@ jobs:
           arch: aarch64
           zip_arch: arm64-v8a
           asset_arch: arm64
-
-  build-x86:
-    executor: package-builder
-    steps:
-      - build_packages:
-          arch: i686
-          zip_arch: x86
-          asset_arch: x86
 
   build-x64:
     executor: package-builder
@@ -287,15 +272,7 @@ jobs:
 workflows:
   build-proot-all-archs:
     jobs:
-      - build-arm:
-          filters:
-            tags:
-              only: /^v\d+\.\d+\.\d+$/
       - build-arm64:
-          filters:
-            tags:
-              only: /^v\d+\.\d+\.\d+$/
-      - build-x86:
           filters:
             tags:
               only: /^v\d+\.\d+\.\d+$/
@@ -305,9 +282,7 @@ workflows:
               only: /^v\d+\.\d+\.\d+$/
       - release:
           requires:
-            - build-arm
             - build-arm64
-            - build-x86
             - build-x64
           filters:
             branches:
