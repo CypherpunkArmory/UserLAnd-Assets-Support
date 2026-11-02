@@ -165,7 +165,11 @@ commands:
             docker exec builder bash -c 'cd ~/termux-packages && sed -i "s/\"24\"/\"26\"/g" scripts/build/termux_step_setup_variables.sh'
             docker exec builder bash -c 'rm -rf /data/data/.built-packages/*'
             docker exec builder bash -c 'cd ~/termux-packages && ./build-package.sh -I -f -a << parameters.arch >> libtalloc'
-            docker exec builder bash -c 'cd ~/termux-packages && PROOT_DIR=~/proot ./build-package.sh -I -f -a << parameters.arch >> proot'
+            # -s: skip proot's dependencies. Its recipe lists pulseaudio, dropbear and busybox for
+            # packaging, but it only compiles against libtalloc, built just above. Clearing
+            # .built-packages at API 26 otherwise rebuilds them all, and libx11 (via pulseaudio)
+            # fails there: "Font.c: fatal error: 'sys/shm.h' file not found".
+            docker exec builder bash -c 'cd ~/termux-packages && PROOT_DIR=~/proot ./build-package.sh -I -f -s -a << parameters.arch >> proot'
           no_output_timeout: 30m
       - run:
           name: Save proot.a10 files for << parameters.arch >>
