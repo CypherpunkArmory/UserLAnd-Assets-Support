@@ -11,5 +11,6 @@ if [ ! -f /support/.ssh_setup_complete ]; then
     touch /support/.ssh_setup_complete
 fi
 
-dropbear -E -p 2022
+# Each UserLAnd app passes its own port, so two apps' sessions can run at once.
+dropbear -E -p "${SSH_PORT:-2022}"
 
